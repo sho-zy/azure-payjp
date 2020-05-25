@@ -5,17 +5,92 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: process.env.APP_NAME,
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        hid: 'viewport',
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1.0'
+      },
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
+        content: process.env.APP_DESC
+      },
+      {
+        hid: 'twitter:card',
+        name: 'twitter:card',
+        content: 'summary_large_image'
+      },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: process.env.APP_NAME
+      },
+      {
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'article'
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: process.env.APP_NAME
+      },
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: process.env.BASE_URL + '/'
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: process.env.APP_DESC
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: process.env.BASE_URL + '/icon.png'
+      },
+      {
+        hid: 'og:locale',
+        property: 'og:locale',
+        content: 'ja_JP'
+      },
+      {
+        hid: 'apple-mobile-web-app-status-bar-style',
+        name: 'apple-mobile-web-app-status-bar-style',
+        content: 'default'
+      },
+      {
+        hid: 'author',
+        name: 'author',
+        content: process.env.APP_NAME
+      },
+      {
+        hid: 'robots',
+        name: 'robots',
+        content: 'max-image-preview:large'
+      },
+      {
+        hid: 'msapplication-TileColor',
+        name: 'msapplication-TileColor',
+        content: '#000000'
+      },
+      {
+        hid: 'msapplication-TileImage',
+        name: 'msapplication-TileImage',
+        content: process.env.BASE_URL + '/icon.png'
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: process.env.BASE_URL + '/favicon.ico'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -28,7 +103,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '~/plugins/localStorage.js', mode: 'client' }],
   /*
    ** Nuxt.js dev-modules
    */

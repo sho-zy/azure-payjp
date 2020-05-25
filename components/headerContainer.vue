@@ -1,7 +1,7 @@
 <template>
   <div
     class="header-container"
-    :class="{ active: isMenuOpen }"
+    :class="{ active: isMenuOpen || $store.state.isCartOpen }"
     :style="'background-image: url(' + baseUrl + bgImage + ');'"
   >
     <header class="header">
@@ -27,21 +27,33 @@
           </li>
         </ul>
       </nav>
-      <div class="cart" :class="{ active: isMenuOpen }">
-        <button class="cart-button" aria-label="カート">
+      <div
+        class="cart"
+        :class="{ active: isMenuOpen || $store.state.isCartOpen }"
+      >
+        <button
+          class="cart-button"
+          aria-label="カート"
+          @click="$store.commit('setIsCartOpen', !$store.state.isCartOpen)"
+        >
           <svg viewBox="0 0 24 24">
             <path :d="mdiCartOutline" />
           </svg>
-          <span class="cart-num" v-text="cartNum" />
+          <span class="cart-num" v-text="$store.state.cartNum" />
         </button>
       </div>
+      <div
+        class="cart-detail"
+        :class="{ active: $store.state.isCartOpen }"
+        :style="'background-image: url(' + baseUrl + cartImage + ');'"
+      ></div>
     </header>
     <h2 class="phrase">
       <span v-for="(text, i) of phrase" :key="i" v-text="text" />
     </h2>
     <p class="action">
       <span class="action-link">
-        <span class="text" v-text="headerButton.name" />
+        <span class="text" v-text="'See all plants'" />
         <svg viewBox="0 0 24 24">
           <path :d="mdiArrowRight" />
         </svg>
@@ -58,10 +70,6 @@ export default {
       type: String,
       default: ''
     },
-    cartNum: {
-      type: Number,
-      default: 0
-    },
     menuItems: {
       type: Array,
       default: () => {}
@@ -76,9 +84,7 @@ export default {
       phrase: ['Real, beautiful plants', 'right to your door'],
       bgImage: '/header.webp',
       menuImage: '/leaf-light-grey.svg',
-      headerButton: {
-        name: 'See all plants'
-      },
+      cartImage: '/cart-bg.webp',
       isMenuOpen: false,
       mdiCartOutline,
       mdiArrowRight,
@@ -238,20 +244,28 @@ export default {
           svg {
             fill: black;
           }
+          .cart-num {
+            color: black;
+          }
         }
       }
+
       @media screen and (min-width: 600px) {
         order: 2;
       }
+
       .cart-button {
+        cursor: pointer;
         display: inline-flex;
         justify-content: center;
         align-items: center;
+
         svg {
           width: 30px;
           height: 30px;
           fill: white;
         }
+
         .cart-num {
           display: none;
           font-size: 20px;
@@ -262,6 +276,25 @@ export default {
             display: block;
           }
         }
+      }
+    }
+
+    .cart-detail {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #f0f5f6;
+      background-size: cover;
+      transform: translateX(-100vw);
+      transition: transform 0.3s ease-in-out;
+
+      &.active {
+        transform: translateX(0);
+        z-index: 101;
       }
     }
   }

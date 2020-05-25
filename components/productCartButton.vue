@@ -2,7 +2,7 @@
   <button
     class="add-icon"
     :aria-label="'カートに追加する'"
-    @click.stop="clickCartAction(item)"
+    @click.stop="clickCartAction(id)"
   >
     <svg viewBox="0 0 24 24">
       <path :d="mdiCartArrowDown" />
@@ -10,47 +10,23 @@
   </button>
 </template>
 <script>
-import { mdiCartArrowDown, mdiCartArrowUp } from '@mdi/js'
+import { mdiCartArrowDown } from '@mdi/js'
 export default {
-  model: {
-    prop: 'cartNum',
-    event: 'setCartNum'
-  },
   props: {
-    item: {
-      type: Object,
-      default: () => {}
-    },
-    cartNum: {
-      type: Number,
-      default: 0
+    id: {
+      type: String,
+      default: ''
     }
   },
   data() {
     return {
-      mdiCartArrowDown,
-      mdiCartArrowUp
+      mdiCartArrowDown
     }
   },
   methods: {
-    clickCartAction(item) {
-      const getjson = localStorage.getItem('cart')
-      const productMap = JSON.parse(getjson)
-      let setjson = ''
-      if (!productMap) {
-        const newproductMap = {}
-        newproductMap[item.id] = 1
-        setjson = JSON.stringify(newproductMap)
-        this.$emit('setCartNum', this.cartNum + 1)
-      } else if (!productMap[item.id]) {
-        productMap[item.id] = 1
-        setjson = JSON.stringify(productMap)
-        this.$emit('setCartNum', this.cartNum + 1)
-      } else {
-        productMap[item.id]++
-        setjson = JSON.stringify(productMap)
-      }
-      localStorage.setItem('cart', setjson)
+    clickCartAction(id) {
+      this.$store.commit('addCartMap', id)
+      this.$store.commit('setIsCartOpen', true)
     }
   }
 }

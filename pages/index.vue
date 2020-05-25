@@ -2,7 +2,6 @@
   <div class="container">
     <headerContainer
       :base-url="baseUrl"
-      :cart-num="cartNum"
       :menu-items="menuItems"
       :title="title"
     />
@@ -29,7 +28,7 @@
             :key="j"
             class="product-item"
           >
-            <productCartButton v-model="cartNum" :item="item" />
+            <productCartButton :id="item.id" />
             <productCard :item="item" :base-url="baseUrl" />
           </slide>
         </carousel>
@@ -152,7 +151,7 @@ export default {
     ]
     return {
       baseUrl: process.env.BASE_URL,
-      title: 'EC Site',
+      title: process.env.APP_NAME,
       menuItems: [
         {
           name: 'Store'
@@ -195,15 +194,9 @@ export default {
       ],
       adsImage: '/promo.webp',
       adsBgImage: '/leaf.svg',
-      cartNum: 0,
       mdiCardsHeart,
       mdiArrowRight
     }
-  },
-  mounted() {
-    const getjson = localStorage.getItem('cart')
-    const productMap = JSON.parse(getjson)
-    this.cartNum = productMap ? Object.keys(productMap).length : 0
   }
 }
 </script>
