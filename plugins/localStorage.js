@@ -4,7 +4,7 @@ export default ({ store }) => {
   window.onNuxtReady(() => {
     createPersistedState({
       key: 'azure-payjp',
-      paths: ['cartMap', 'cartNum']
+      paths: ['cartMap']
     })(store)
   })
 }

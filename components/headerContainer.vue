@@ -53,7 +53,10 @@
           <svg viewBox="0 0 24 24">
             <path :d="mdiCartOutline" />
           </svg>
-          <span class="cart-num" v-text="$store.state.cartNum" />
+          <span
+            class="cart-num"
+            v-text="Object.keys($store.state.cartMap).length"
+          />
         </button>
       </div>
       <cartDetailContainer />

@@ -1,29 +1,31 @@
 export const state = () => ({
   cartMap: {},
-  cartNum: 0,
   isCartOpen: false,
   isMenuOpen: false
 })
 
 export const mutations = {
   addCartMap(state, id) {
-    if (!state.cartMap[id]) {
-      state.cartMap[id] = 1
-      state.cartNum++
+    const tempMap = JSON.parse(JSON.stringify(state.cartMap))
+    if (!tempMap[id]) {
+      tempMap[id] = 1
     } else {
-      state.cartMap[id]++
+      tempMap[id]++
     }
+    state.cartMap = tempMap
   },
   reduceCartMap(state, id) {
-    if (state.cartMap[id] && state.cartMap[id] > 0) {
-      state.cartMap[id]--
-      if (state.cartMap[id] === 0) state.cartNum--
+    const tempMap = JSON.parse(JSON.stringify(state.cartMap))
+    if (tempMap[id] && tempMap[id] > 0) {
+      tempMap[id]--
+      state.cartMap = tempMap
     }
   },
   removeCartMap(state, id) {
-    if (state.cartMap[id]) {
-      delete state.cartMap[id]
-      state.cartNum--
+    const tempMap = JSON.parse(JSON.stringify(state.cartMap))
+    if (tempMap[id]) {
+      delete tempMap[id]
+      state.cartMap = tempMap
     }
   },
   setIsCartOpen(state, flag) {

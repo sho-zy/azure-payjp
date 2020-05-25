@@ -25,10 +25,24 @@ export default {
       default: ''
     }
   },
-  data() {
+  async data() {
     return {
+      productItems: await require(`~/assets/data/productList.json`),
       cartImage: '/cart-bg.webp',
       mdiClose
+    }
+  },
+  computed: {
+    cartItems() {
+      if (!this.productItems || this.productItems.length === 0) return []
+      return this.productItems
+        .forEach((product) => {
+          if (this.$store.state.cartMap[product.id]) {
+            product.num = this.$store.state.cartMap[product.id]
+            product.subTotal = product.num * product.amount
+          }
+        })
+        .filter((product) => product.num && product.num > 0)
     }
   }
 }
