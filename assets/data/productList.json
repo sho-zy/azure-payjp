@@ -1,0 +1,74 @@
+[
+  {
+    "id": "aaa01",
+    "name": "Plant A",
+    "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
+    "type": "Big Plants",
+    "amount": 49.4,
+    "image": "/plant1-featured.jpg",
+    "hit": true
+  },
+  {
+    "id": "aaa02",
+    "name": "Plant B",
+    "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
+    "type": "Small Plants",
+    "amount": 99.0,
+    "image": "/plant2-featured.jpg",
+    "hit": true
+  },
+  {
+    "id": "aaa03",
+    "name": "Plant C",
+    "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
+    "type": "Big Plants",
+    "amount": 18.9,
+    "image": "/plant3-featured.jpg",
+    "hit": true
+  },
+  {
+    "id": "aaa04",
+    "name": "Plant D",
+    "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
+    "type": "Small Plants",
+    "amount": 220,
+    "image": "/plant4-featured.jpg",
+    "hit": true
+  },
+  {
+    "id": "aaa05",
+    "name": "Plant E",
+    "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
+    "type": "Big Plants",
+    "amount": 400.0,
+    "image": "/plant5-featured.jpg",
+    "hit": false
+  },
+  {
+    "id": "aaa06",
+    "name": "Plant F",
+    "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
+    "type": "Small Plants",
+    "amount": 200.0,
+    "image": "/plant6-featured.jpg",
+    "hit": false
+  },
+  {
+    "id": "aaa07",
+    "name": "Plant G",
+    "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
+    "type": "Big Plants",
+    "amount": 36.8,
+    "image": "/plant7-featured.jpg",
+    "hit": false
+  },
+  {
+    "id": "aaa08",
+    "name": "Plant H",
+    "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
+    "type": "Small Plants",
+    "amount": 490.0,
+    "image": "/plant8-featured.jpg",
+    "hit": false
+  }
+]

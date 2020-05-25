@@ -1,6 +1,10 @@
 <template>
-  <div class="container">
+  <div
+    class="container"
+    :class="{ active: $store.state.isMenuOpen || $store.state.isCartOpen }"
+  >
     <headerContainer
+      class="header-container"
       :base-url="baseUrl"
       :menu-items="menuItems"
       :title="title"
@@ -36,7 +40,7 @@
       <section class="review-section">
         <h2 class="title" v-text="'Reviews'" />
         <ul class="review-list">
-          <li v-for="(item, i) of reviews" :key="i" class="review-item">
+          <li v-for="(item, i) of reviewItems" :key="i" class="review-item">
             <p class="comment" v-text="item.comment" />
             <p class="name" v-text="item.name" />
           </li>
@@ -82,87 +86,9 @@ export default {
     productCartButton: () => import('~/components/productCartButton.vue'),
     footerContainer: () => import('~/components/footerContainer.vue')
   },
-  data() {
-    const productItems = [
-      {
-        id: 'aaa01',
-        name: 'Plant A',
-        type: 'Big Plants',
-        amount: 49.4,
-        image: '/plant1-featured.jpg',
-        hit: true
-      },
-      {
-        id: 'aaa02',
-        name: 'Plant B',
-        type: 'Small Plants',
-        amount: 99.0,
-        image: '/plant2-featured.jpg',
-        hit: true
-      },
-      {
-        id: 'aaa03',
-        name: 'Plant C',
-        type: 'Big Plants',
-        amount: 18.9,
-        image: '/plant3-featured.jpg',
-        hit: true
-      },
-      {
-        id: 'aaa04',
-        name: 'Plant D',
-        type: 'Small Plants',
-        amount: 220,
-        image: '/plant4-featured.jpg',
-        hit: true
-      },
-      {
-        id: 'aaa05',
-        name: 'Plant E',
-        type: 'Big Plants',
-        amount: 400.0,
-        image: '/plant5-featured.jpg',
-        hit: false
-      },
-      {
-        id: 'aaa06',
-        name: 'Plant F',
-        type: 'Small Plants',
-        amount: 200.0,
-        image: '/plant6-featured.jpg',
-        hit: false
-      },
-      {
-        id: 'aaa07',
-        name: 'Plant G',
-        type: 'Big Plants',
-        amount: 36.8,
-        image: '/plant7-featured.jpg',
-        hit: false
-      },
-      {
-        id: 'aaa08',
-        name: 'Plant H',
-        type: 'Small Plants',
-        amount: 490.0,
-        image: '/plant8-featured.jpg',
-        hit: false
-      }
-    ]
+  async asyncData({ params, error, payload }) {
+    const productItems = await require(`~/assets/data/productList.json`)
     return {
-      baseUrl: process.env.BASE_URL,
-      title: process.env.APP_NAME,
-      menuItems: [
-        {
-          name: 'Store'
-        },
-        {
-          name: 'About'
-        },
-        {
-          name: 'FAQ'
-        }
-      ],
       products: [
         {
           title: 'Best sellers',
@@ -180,21 +106,26 @@ export default {
           items: productItems.filter((item) => item.type === 'Small Plants')
         }
       ],
-      reviews: [
+      reviewItems: await require(`~/assets/data/reviewList.json`)
+    }
+  },
+  data() {
+    return {
+      baseUrl: process.env.BASE_URL,
+      title: process.env.APP_NAME,
+      menuItems: [
         {
-          name: 'JOHN DOPE',
-          comment:
-            "I didn't know the Snipcart guys were into herbs as well! How beautiful is that Planty theme. I'm going to launch a killer JAMstack e-commerce store using this for sure."
+          name: 'Store'
         },
         {
-          name: 'MAJOR PAYNE',
-          comment:
-            "Well I'll be d*mned. These plants really ARE greener than any of my recruits."
+          name: 'About'
+        },
+        {
+          name: 'FAQ'
         }
       ],
       adsImage: '/promo.webp',
       adsBgImage: '/leaf.svg',
-      mdiCardsHeart,
       mdiArrowRight
     }
   }
@@ -202,6 +133,19 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container {
+  &.active {
+    max-height: 100vh;
+    overflow: hidden;
+    .header-container {
+      z-index: 3;
+    }
+  }
+
+  .header-container {
+    position: relative;
+    z-index: 1;
+  }
+
   .main-container {
     width: 100%;
     max-width: 1300px;

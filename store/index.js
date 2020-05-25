@@ -1,7 +1,8 @@
 export const state = () => ({
   cartMap: {},
   cartNum: 0,
-  isCartOpen: false
+  isCartOpen: false,
+  isMenuOpen: false
 })
 
 export const mutations = {
@@ -27,6 +28,11 @@ export const mutations = {
   },
   setIsCartOpen(state, flag) {
     state.isCartOpen = flag
+    state.isMenuOpen = false
+  },
+  setIsMenuOpen(state, flag) {
+    state.isMenuOpen = flag
+    state.isCartOpen = false
   }
 }
 
@@ -42,5 +48,8 @@ export const actions = {
   },
   setIsCartOpen({ commit }, flag) {
     commit('setIsCartOpen', flag)
+  },
+  setIsMenuOpen({ commit }, flag) {
+    commit('setIsMenuOpen', flag)
   }
 }

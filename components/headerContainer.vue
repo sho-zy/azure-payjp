@@ -1,35 +1,49 @@
 <template>
   <div
     class="header-container"
-    :class="{ active: isMenuOpen || $store.state.isCartOpen }"
     :style="'background-image: url(' + baseUrl + bgImage + ');'"
   >
     <header class="header">
-      <h1 class="logo" :class="{ active: isMenuOpen }" v-text="title" />
+      <h1
+        class="logo"
+        :class="{ active: $store.state.isMenuOpen }"
+        v-text="title"
+      />
       <nav class="menu">
         <button
           class="menu-button"
-          :class="{ active: isMenuOpen }"
           aria-label="メニュー"
-          @click="isMenuOpen = !isMenuOpen"
+          @click="$store.commit('setIsMenuOpen', !$store.state.isMenuOpen)"
         >
           <svg viewBox="0 0 24 24">
             <path :d="mdiMenu" />
           </svg>
         </button>
-        <ul
-          class="menu-list"
-          :class="{ active: isMenuOpen }"
+        <div
+          class="menu-container"
+          :class="{ active: $store.state.isMenuOpen }"
           :style="'background-image: url(' + baseUrl + menuImage + ');'"
         >
-          <li v-for="(item, i) of menuItems" :key="i" class="menu-item">
-            <p class="menu-link" v-text="item.name" />
-          </li>
-        </ul>
+          <p class="button-container">
+            <button
+              class="close-button"
+              @click="$store.commit('setIsMenuOpen', false)"
+            >
+              <svg viewBox="0 0 24 24">
+                <path :d="mdiClose" />
+              </svg>
+            </button>
+          </p>
+          <ul class="menu-list">
+            <li v-for="(item, i) of menuItems" :key="i" class="menu-item">
+              <p class="menu-link" v-text="item.name" />
+            </li>
+          </ul>
+        </div>
       </nav>
       <div
         class="cart"
-        :class="{ active: isMenuOpen || $store.state.isCartOpen }"
+        :class="{ active: $store.state.isMenuOpen || $store.state.isCartOpen }"
       >
         <button
           class="cart-button"
@@ -42,11 +56,7 @@
           <span class="cart-num" v-text="$store.state.cartNum" />
         </button>
       </div>
-      <div
-        class="cart-detail"
-        :class="{ active: $store.state.isCartOpen }"
-        :style="'background-image: url(' + baseUrl + cartImage + ');'"
-      ></div>
+      <cartDetailContainer />
     </header>
     <h2 class="phrase">
       <span v-for="(text, i) of phrase" :key="i" v-text="text" />
@@ -63,8 +73,11 @@
   </div>
 </template>
 <script>
-import { mdiCartOutline, mdiArrowRight, mdiMenu } from '@mdi/js'
+import { mdiCartOutline, mdiArrowRight, mdiMenu, mdiClose } from '@mdi/js'
 export default {
+  components: {
+    cartDetailContainer: () => import('~/components/cartDetailContainer.vue')
+  },
   props: {
     baseUrl: {
       type: String,
@@ -84,11 +97,10 @@ export default {
       phrase: ['Real, beautiful plants', 'right to your door'],
       bgImage: '/header.webp',
       menuImage: '/leaf-light-grey.svg',
-      cartImage: '/cart-bg.webp',
-      isMenuOpen: false,
       mdiCartOutline,
       mdiArrowRight,
-      mdiMenu
+      mdiMenu,
+      mdiClose
     }
   }
 }
@@ -99,12 +111,6 @@ export default {
   width: 100%;
   background-size: cover;
   position: relative;
-  z-index: 1;
-
-  &.active {
-    z-index: 100;
-    height: 100vh;
-  }
 
   @media screen and (min-width: 600px) {
     height: 896px;
@@ -124,7 +130,6 @@ export default {
   }
 
   .header {
-    position: relative;
     width: calc(100% -36px);
     max-width: 1300px;
     margin: 0 auto;
@@ -132,6 +137,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    position: relative;
     z-index: 3;
 
     @media screen and (min-width: 600px) {
@@ -144,7 +150,6 @@ export default {
       flex-grow: 2;
       font-size: 32px;
       color: white;
-      z-index: 101;
 
       &.active {
         color: black;
@@ -157,7 +162,6 @@ export default {
 
     .menu {
       order: 2;
-      position: relative;
 
       @media screen and (min-width: 600px) {
         order: 1;
@@ -165,8 +169,6 @@ export default {
 
       .menu-button {
         margin-left: 4px;
-        position: relative;
-        z-index: 101;
 
         svg {
           width: 30px;
@@ -174,35 +176,48 @@ export default {
           fill: white;
         }
 
-        &.active {
-          svg {
-            fill: #88dd9b;
-          }
-        }
-
         @media screen and (min-width: 600px) {
           display: none;
         }
       }
 
-      .menu-list {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      .menu-container {
         position: relative;
-        z-index: 2;
 
-        .menu-item {
-          margin: 0 18px;
-          .menu-link {
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
+        .button-container {
+          display: none;
+          position: absolute;
+          top: 16px;
+          right: 16px;
+
+          .close-button {
+            cursor: pointer;
+
+            svg {
+              width: 40px;
+              height: 40px;
+              fill: black;
+            }
+          }
+        }
+
+        .menu-list {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .menu-item {
+            margin: 0 18px;
+
+            .menu-link {
+              color: white;
+              font-size: 20px;
+              font-weight: bold;
+            }
           }
         }
 
         @media screen and (max-width: 599px) {
-          flex-direction: column;
           position: fixed;
           top: 0;
           bottom: 0;
@@ -221,13 +236,24 @@ export default {
             z-index: 100;
           }
 
-          .menu-item {
-            margin: 12px 0;
-            .menu-link {
-              color: black;
-              font-size: 30px;
-              line-height: 30px;
-              font-weight: bold;
+          .button-container {
+            display: block;
+          }
+
+          .menu-list {
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+
+            .menu-item {
+              margin: 12px 0;
+
+              .menu-link {
+                color: black;
+                font-size: 30px;
+                line-height: 30px;
+                font-weight: bold;
+              }
             }
           }
         }
@@ -236,8 +262,6 @@ export default {
 
     .cart {
       order: 1;
-      position: relative;
-      z-index: 102;
 
       &.active {
         .cart-button {
@@ -276,25 +300,6 @@ export default {
             display: block;
           }
         }
-      }
-    }
-
-    .cart-detail {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: #f0f5f6;
-      background-size: cover;
-      transform: translateX(-100vw);
-      transition: transform 0.3s ease-in-out;
-
-      &.active {
-        transform: translateX(0);
-        z-index: 101;
       }
     }
   }
