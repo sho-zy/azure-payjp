@@ -56,12 +56,12 @@
         <p class="amount" v-text="'from $149.99'" />
 
         <p class="ads-link">
-          <nuxt-link :to="''" aria-label="Discover" class="link">
+          <span class="link">
             <span class="text" v-text="'Discover'" />
             <svg viewBox="0 0 24 24">
               <path :d="mdiArrowRight" />
             </svg>
-          </nuxt-link>
+          </span>
         </p>
       </div>
     </div>
@@ -91,8 +91,7 @@ export default {
         type: 'Big Plants',
         amount: 49.4,
         image: '/plant1-featured.jpg',
-        hit: true,
-        isAdded: false
+        hit: true
       },
       {
         id: 'aaa02',
@@ -100,8 +99,7 @@ export default {
         type: 'Small Plants',
         amount: 99.0,
         image: '/plant2-featured.jpg',
-        hit: true,
-        isAdded: false
+        hit: true
       },
       {
         id: 'aaa03',
@@ -109,8 +107,7 @@ export default {
         type: 'Big Plants',
         amount: 18.9,
         image: '/plant3-featured.jpg',
-        hit: true,
-        isAdded: false
+        hit: true
       },
       {
         id: 'aaa04',
@@ -118,8 +115,7 @@ export default {
         type: 'Small Plants',
         amount: 220,
         image: '/plant4-featured.jpg',
-        hit: true,
-        isAdded: false
+        hit: true
       },
       {
         id: 'aaa05',
@@ -127,8 +123,7 @@ export default {
         type: 'Big Plants',
         amount: 400.0,
         image: '/plant5-featured.jpg',
-        hit: false,
-        isAdded: false
+        hit: false
       },
       {
         id: 'aaa06',
@@ -136,8 +131,7 @@ export default {
         type: 'Small Plants',
         amount: 200.0,
         image: '/plant6-featured.jpg',
-        hit: false,
-        isAdded: false
+        hit: false
       },
       {
         id: 'aaa07',
@@ -145,8 +139,7 @@ export default {
         type: 'Big Plants',
         amount: 36.8,
         image: '/plant7-featured.jpg',
-        hit: false,
-        isAdded: false
+        hit: false
       },
       {
         id: 'aaa08',
@@ -154,8 +147,7 @@ export default {
         type: 'Small Plants',
         amount: 490.0,
         image: '/plant8-featured.jpg',
-        hit: false,
-        isAdded: false
+        hit: false
       }
     ]
     return {
@@ -163,16 +155,13 @@ export default {
       title: 'EC Site',
       menuItems: [
         {
-          name: 'Store',
-          to: '/store/'
+          name: 'Store'
         },
         {
-          name: 'About',
-          to: '/about/'
+          name: 'About'
         },
         {
-          name: 'FAQ',
-          to: '/faq/'
+          name: 'FAQ'
         }
       ],
       products: [
@@ -213,14 +202,8 @@ export default {
   },
   mounted() {
     const getjson = localStorage.getItem('cart')
-    const productList = JSON.parse(getjson)
-    if (!productList || productList.length === 0) return
-    this.products.forEach((category) => {
-      category.items.forEach((item) => {
-        item.isAdded = productList.includes(item.id)
-      })
-    })
-    this.cartNum = productList.length
+    const productMap = JSON.parse(getjson)
+    this.cartNum = productMap ? Object.keys(productMap).length : 0
   }
 }
 </script>

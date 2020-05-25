@@ -1,12 +1,11 @@
 <template>
   <button
     class="add-icon"
-    :class="{ active: item.isAdded }"
-    :aria-label="'カート' + (item.isAdded ? 'から削除' : 'に追加') + 'する'"
+    :aria-label="'カートに追加する'"
     @click.stop="clickCartAction(item)"
   >
     <svg viewBox="0 0 24 24">
-      <path :d="item.isAdded ? mdiCartArrowUp : mdiCartArrowDown" />
+      <path :d="mdiCartArrowDown" />
     </svg>
   </button>
 </template>
@@ -36,23 +35,22 @@ export default {
   methods: {
     clickCartAction(item) {
       const getjson = localStorage.getItem('cart')
-      const productList = JSON.parse(getjson)
+      const productMap = JSON.parse(getjson)
       let setjson = ''
-      if (!productList) {
-        const newProductList = [item.id]
-        setjson = JSON.stringify(newProductList)
+      if (!productMap) {
+        const newproductMap = {}
+        newproductMap[item.id] = 1
+        setjson = JSON.stringify(newproductMap)
         this.$emit('setCartNum', this.cartNum + 1)
-      } else if (!productList.includes(item.id)) {
-        productList.push(item.id)
-        setjson = JSON.stringify(productList)
+      } else if (!productMap[item.id]) {
+        productMap[item.id] = 1
+        setjson = JSON.stringify(productMap)
         this.$emit('setCartNum', this.cartNum + 1)
       } else {
-        const newProductList = productList.filter((id) => id !== item.id)
-        setjson = JSON.stringify(newProductList)
-        this.$emit('setCartNum', this.cartNum - 1)
+        productMap[item.id]++
+        setjson = JSON.stringify(productMap)
       }
       localStorage.setItem('cart', setjson)
-      item.isAdded = !item.isAdded
     }
   }
 }
@@ -78,7 +76,7 @@ export default {
     fill: #88dd9b;
   }
 
-  &.active {
+  &:hover {
     background-color: #88dd9b;
     svg {
       fill: white;

@@ -23,38 +23,29 @@
           :style="'background-image: url(' + baseUrl + menuImage + ');'"
         >
           <li v-for="(item, i) of menuItems" :key="i" class="menu-item">
-            <nuxt-link
-              :to="item.to"
-              class="menu-link"
-              :aria-label="item.name"
-              v-text="item.name"
-            />
+            <p class="menu-link" v-text="item.name" />
           </li>
         </ul>
       </nav>
       <div class="cart" :class="{ active: isMenuOpen }">
-        <nuxt-link class="cart-link" aria-label="カート" to="/cart/">
+        <button class="cart-button" aria-label="カート">
           <svg viewBox="0 0 24 24">
             <path :d="mdiCartOutline" />
           </svg>
           <span class="cart-num" v-text="cartNum" />
-        </nuxt-link>
+        </button>
       </div>
     </header>
     <h2 class="phrase">
       <span v-for="(text, i) of phrase" :key="i" v-text="text" />
     </h2>
     <p class="action">
-      <nuxt-link
-        :aria-label="headerButton.name"
-        :to="headerButton.to"
-        class="action-link"
-      >
+      <span class="action-link">
         <span class="text" v-text="headerButton.name" />
         <svg viewBox="0 0 24 24">
           <path :d="mdiArrowRight" />
         </svg>
-      </nuxt-link>
+      </span>
     </p>
     <div class="wrapper" />
   </div>
@@ -86,8 +77,7 @@ export default {
       bgImage: '/header.webp',
       menuImage: '/leaf-light-grey.svg',
       headerButton: {
-        name: 'See all plants',
-        to: '/store/'
+        name: 'See all plants'
       },
       isMenuOpen: false,
       mdiCartOutline,
@@ -244,7 +234,7 @@ export default {
       z-index: 102;
 
       &.active {
-        .cart-link {
+        .cart-button {
           svg {
             fill: black;
           }
@@ -253,7 +243,7 @@ export default {
       @media screen and (min-width: 600px) {
         order: 2;
       }
-      .cart-link {
+      .cart-button {
         display: inline-flex;
         justify-content: center;
         align-items: center;

@@ -4,12 +4,7 @@
       <p class="logo" v-text="title" />
       <ul class="menu-list">
         <li v-for="(item, i) of menuItems" :key="i" class="menu-item">
-          <nuxt-link
-            :to="item.to"
-            class="menu-link"
-            :aria-label="item.name"
-            v-text="item.name"
-          />
+          <p class="menu-link" v-text="item.name" />
         </li>
       </ul>
       <small

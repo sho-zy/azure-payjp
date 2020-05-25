@@ -1,9 +1,5 @@
 <template>
-  <nuxt-link
-    :to="'/product/' + item.id + '/'"
-    :aria-label="item.name"
-    class="product-link"
-  >
+  <div class="product-link">
     <p class="product-image">
       <img :src="baseUrl + item.image" :alt="item.name" class="image" />
     </p>
@@ -13,7 +9,7 @@
       class="amount"
       v-text="'¥' + item.amount.toFixed(2).toLocaleString() + '-'"
     />
-  </nuxt-link>
+  </div>
 </template>
 <script>
 export default {
