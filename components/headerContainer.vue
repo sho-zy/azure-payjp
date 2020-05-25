@@ -4,11 +4,7 @@
     :style="'background-image: url(' + baseUrl + bgImage + ');'"
   >
     <header class="header">
-      <h1
-        class="logo"
-        :class="{ active: $store.state.isMenuOpen }"
-        v-text="title"
-      />
+      <h1 class="logo" v-text="title" />
       <nav class="menu">
         <button
           class="menu-button"
@@ -19,32 +15,13 @@
             <path :d="mdiMenu" />
           </svg>
         </button>
-        <div
-          class="menu-container"
-          :class="{ active: $store.state.isMenuOpen }"
-          :style="'background-image: url(' + baseUrl + menuImage + ');'"
-        >
-          <p class="button-container">
-            <button
-              class="close-button"
-              @click="$store.commit('setIsMenuOpen', false)"
-            >
-              <svg viewBox="0 0 24 24">
-                <path :d="mdiClose" />
-              </svg>
-            </button>
-          </p>
-          <ul class="menu-list">
-            <li v-for="(item, i) of menuItems" :key="i" class="menu-item">
-              <p class="menu-link" v-text="item.name" />
-            </li>
-          </ul>
-        </div>
+        <ul class="menu-list">
+          <li v-for="(item, i) of menuItems" :key="i" class="menu-item">
+            <p class="menu-link" v-text="item.name" />
+          </li>
+        </ul>
       </nav>
-      <div
-        class="cart"
-        :class="{ active: $store.state.isMenuOpen || $store.state.isCartOpen }"
-      >
+      <div class="cart">
         <button
           class="cart-button"
           aria-label="カート"
@@ -59,7 +36,6 @@
           />
         </button>
       </div>
-      <cartDetailContainer />
     </header>
     <h2 class="phrase">
       <span v-for="(text, i) of phrase" :key="i" v-text="text" />
@@ -78,9 +54,6 @@
 <script>
 import { mdiCartOutline, mdiArrowRight, mdiMenu, mdiClose } from '@mdi/js'
 export default {
-  components: {
-    cartDetailContainer: () => import('~/components/cartDetailContainer.vue')
-  },
   props: {
     baseUrl: {
       type: String,
@@ -154,10 +127,6 @@ export default {
       font-size: 32px;
       color: white;
 
-      &.active {
-        color: black;
-      }
-
       @media screen and (min-width: 600px) {
         flex-grow: initial;
       }
@@ -184,80 +153,22 @@ export default {
         }
       }
 
-      .menu-container {
-        position: relative;
+      .menu-list {
+        display: none;
+        justify-content: center;
+        align-items: center;
 
-        .button-container {
-          display: none;
-          position: absolute;
-          top: 16px;
-          right: 16px;
-
-          .close-button {
-            cursor: pointer;
-
-            svg {
-              width: 40px;
-              height: 40px;
-              fill: black;
-            }
-          }
-        }
-
-        .menu-list {
+        @media screen and (min-width: 600px) {
           display: flex;
-          justify-content: center;
-          align-items: center;
-
-          .menu-item {
-            margin: 0 18px;
-
-            .menu-link {
-              color: white;
-              font-size: 20px;
-              font-weight: bold;
-            }
-          }
         }
 
-        @media screen and (max-width: 599px) {
-          position: fixed;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          width: 100vw;
-          height: 100vh;
-          background-color: white;
-          background-size: cover;
-          background-position: center;
-          transform: translateX(-100vw);
-          transition: transform 0.3s ease-in-out;
+        .menu-item {
+          margin: 0 18px;
 
-          &.active {
-            transform: translateX(0);
-            z-index: 100;
-          }
-
-          .button-container {
-            display: block;
-          }
-
-          .menu-list {
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
-
-            .menu-item {
-              margin: 12px 0;
-
-              .menu-link {
-                color: black;
-                font-size: 30px;
-                line-height: 30px;
-                font-weight: bold;
-              }
-            }
+          .menu-link {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
           }
         }
       }
@@ -265,17 +176,6 @@ export default {
 
     .cart {
       order: 1;
-
-      &.active {
-        .cart-button {
-          svg {
-            fill: black;
-          }
-          .cart-num {
-            color: black;
-          }
-        }
-      }
 
       @media screen and (min-width: 600px) {
         order: 2;

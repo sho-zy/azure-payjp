@@ -17,10 +17,6 @@
 <script>
 export default {
   props: {
-    baseUrl: {
-      type: String,
-      default: ''
-    },
     title: {
       type: String,
       default: ''

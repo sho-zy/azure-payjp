@@ -9,6 +9,8 @@
       :menu-items="menuItems"
       :title="title"
     />
+    <menuModal :base-url="baseUrl" :menu-items="menuItems" />
+    <cartModal :base-url="baseUrl" :product-items="productItems" />
     <main class="main-container">
       <section
         v-for="(category, i) of products"
@@ -68,11 +70,7 @@
         </p>
       </div>
     </div>
-    <footerContainer
-      :base-url="baseUrl"
-      :menu-items="menuItems"
-      :title="title"
-    />
+    <footerContainer :menu-items="menuItems" :title="title" />
   </div>
 </template>
 <script>
@@ -82,6 +80,8 @@ export default {
     Carousel: () => import('vue-carousel/src/Carousel.vue'),
     Slide: () => import('vue-carousel/src/Slide.vue'),
     headerContainer: () => import('~/components/headerContainer.vue'),
+    menuModal: () => import('~/components/menuModal.vue'),
+    cartModal: () => import('~/components/cartModal.vue'),
     productCard: () => import('~/components/productCard.vue'),
     productCartButton: () => import('~/components/productCartButton.vue'),
     footerContainer: () => import('~/components/footerContainer.vue')
@@ -89,6 +89,7 @@ export default {
   async asyncData({ params, error, payload }) {
     const productItems = await require(`~/assets/data/productList.json`)
     return {
+      productItems,
       products: [
         {
           title: 'Best sellers',
@@ -136,9 +137,6 @@ export default {
   &.active {
     max-height: 100vh;
     overflow: hidden;
-    .header-container {
-      z-index: 3;
-    }
   }
 
   .header-container {
