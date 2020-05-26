@@ -59,9 +59,6 @@
 <script>
 import { mdiArrowRight, mdiLoading, mdiCheckCircleOutline } from '@mdi/js'
 export default {
-  components: {
-    PayjpCheckout: () => import('vue-payjp-checkout')
-  },
   props: {
     items: {
       type: Array,
