@@ -1,4 +1,4 @@
-import Dotenv from 'dotenv-webpack'
+require('dotenv').config()
 export default {
   mode: 'universal',
   /*
@@ -109,7 +109,8 @@ export default {
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/dotenv'
   ],
   /*
    ** Nuxt.js modules
@@ -131,7 +132,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {},
-    plugins: [new Dotenv()]
+    extend(config, ctx) {}
   }
 }
