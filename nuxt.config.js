@@ -103,10 +103,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    { src: '~/plugins/localStorage.js', mode: 'client' },
-    { src: '~/plugins/payjp.js', mode: 'client' }
-  ],
+  plugins: [{ src: '~/plugins/localStorage.js', mode: 'client' }],
   /*
    ** Nuxt.js dev-modules
    */

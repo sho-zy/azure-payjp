@@ -6,16 +6,15 @@
         <p v-text="'$' + totalPrice.toFixed(2).toLocaleString()" />
       </div>
       <div class="button-container">
-        <client-only>
-          <payjp-checkout
-            :api-key="payjpPk"
-            text="Checkout"
-            class="payjp-button"
-            submit-text="テストカードで支払い"
-            @created="onTokenCreated"
-            @failed="onTokenFailed"
-          />
-        </client-only>
+        <payjp-checkout
+          v-if="$store.state.isCartOpen"
+          :api-key="payjpPk"
+          text="Checkout"
+          class="payjp-button"
+          submit-text="テストカードで支払い"
+          @created="onTokenCreated"
+          @failed="onTokenFailed"
+        />
         <button
           :disabled="totalPrice === 0"
           class="pay-button"
@@ -59,6 +58,9 @@
 <script>
 import { mdiArrowRight, mdiLoading, mdiCheckCircleOutline } from '@mdi/js'
 export default {
+  components: {
+    PayjpCheckout: () => import('vue-payjp-checkout')
+  },
   props: {
     items: {
       type: Array,
