@@ -16,7 +16,11 @@
           :label="'カート'"
           :target="'cart'"
           :icon="mdiCartOutline"
-          :text="Object.keys($store.state.cartMap).length.toString(10)"
+          :text="
+            Object.keys($store.state.cartMap)
+              .reduce((sum, key) => sum + $store.state.cartMap[key], 0)
+              .toString(10)
+          "
         />
         <modalOpenButton
           :label="'メニュー'"

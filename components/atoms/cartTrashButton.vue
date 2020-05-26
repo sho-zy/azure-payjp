@@ -1,0 +1,40 @@
+<template>
+  <button class="trash-button" @click="$store.commit('removeCartMap', id)">
+    <svg viewBox="0 0 24 24">
+      <path :d="mdiTrashCanOutline" />
+    </svg>
+  </button>
+</template>
+<script>
+import { mdiTrashCanOutline } from '@mdi/js'
+export default {
+  props: {
+    id: {
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      mdiTrashCanOutline
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.trash-button {
+  cursor: pointer;
+  border: solid 1px whitesmoke;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: darkred;
+  }
+}
+</style>

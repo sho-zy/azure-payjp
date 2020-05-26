@@ -5,29 +5,23 @@
     :style="'background-image: url(' + baseUrl + cartImage + ');'"
   >
     <modalCloseButton />
+    <p class="logo" v-text="appName" />
     <ul class="cart-list">
       <li v-for="(item, i) of cartItems" :key="i" class="cart-item">
-        <div class="wrapper">
-          <p class="product-image">
-            <img :src="baseUrl + item.image" :alt="item.name" class="image" />
-          </p>
-          <button class="trash-button" @click="clickTrashButton(item.id)">
-            <svg viewBox="0 0 24 24">
-              <path :d="mdiTrashCanOutline" />
-            </svg>
-          </button>
-          <p class="name" v-text="item.name" />
-          <p class="desc" v-text="item.desc" />
-        </div>
+        <cartItemCard :item="item" :base-url="baseUrl" />
       </li>
     </ul>
+    <cartPayContainer :items="cartItems" />
   </div>
 </template>
 <script>
-import { mdiTrashCanOutline } from '@mdi/js'
+import { mdiTrashCanOutline, mdiPlus, mdiMinus } from '@mdi/js'
 export default {
   components: {
-    modalCloseButton: () => import('~/components/atoms/modalCloseButton.vue')
+    modalCloseButton: () => import('~/components/atoms/modalCloseButton.vue'),
+    cartItemCard: () => import('~/components/molecules/cartItemCard.vue'),
+    cartPayContainer: () =>
+      import('~/components/molecules/cartPayContainer.vue')
   },
   props: {
     baseUrl: {
@@ -41,9 +35,12 @@ export default {
   },
   data() {
     return {
+      appName: process.env.APP_NAME,
       cartItems: this.createCartItems(this.$store.state.cartMap),
       cartImage: '/cart-bg.webp',
-      mdiTrashCanOutline
+      mdiTrashCanOutline,
+      mdiPlus,
+      mdiMinus
     }
   },
   computed: {
@@ -68,9 +65,6 @@ export default {
         }
       })
       return this.productItems.filter((item) => item.num && item.num > 0)
-    },
-    clickTrashButton(id) {
-      this.$store.commit('removeCartMap', id)
     }
   }
 }
@@ -95,11 +89,17 @@ export default {
     transform: translateX(0);
   }
 
+  .logo {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
   .cart-list {
-    padding-top: 120px;
     width: 100%;
     max-width: 1300px;
-    margin: 0 auto;
+    margin: 32px auto 0;
 
     .cart-item {
       min-height: 120px;
@@ -107,63 +107,6 @@ export default {
       background-color: white;
       padding: 36px;
       margin-bottom: 24px;
-
-      .wrapper {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-
-        .product-image,
-        .trash-button {
-          position: absolute;
-          top: 0;
-        }
-
-        .product-image {
-          left: 0;
-          width: 120px;
-          height: 120px;
-          overflow: hidden;
-          border-radius: 8px;
-
-          .image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-        }
-
-        .trash-button {
-          cursor: pointer;
-          right: 0;
-          border: solid 1px whitesmoke;
-          width: 32px;
-          height: 32px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          svg {
-            width: 20px;
-            height: 20px;
-            fill: red;
-          }
-        }
-
-        .name {
-          width: 100%;
-          padding-left: 156px;
-          font-size: 22px;
-        }
-
-        .desc {
-          width: 100%;
-          padding-left: 156px;
-          font-size: 14px;
-          font-weight: lighter;
-        }
-      }
     }
   }
 }

@@ -21,10 +21,12 @@ export const mutations = {
   },
   reduceCartMap(state, id) {
     const tempMap = JSON.parse(JSON.stringify(state.cartMap))
-    if (tempMap[id] && tempMap[id] > 0) {
+    if (tempMap[id] && tempMap[id] > 1) {
       tempMap[id]--
-      state.cartMap = tempMap
+    } else if (tempMap[id] && tempMap[id] === 1) {
+      delete tempMap[id]
     }
+    state.cartMap = tempMap
   },
   removeCartMap(state, id) {
     const tempMap = JSON.parse(JSON.stringify(state.cartMap))
