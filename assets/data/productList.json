@@ -1,74 +1,74 @@
 [
   {
     "id": "aaa01",
-    "name": "Plant A",
+    "name": "Dining table",
     "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
-    "type": "Big Plants",
+    "type": "Big Product",
     "amount": 49.4,
-    "image": "/plant1-featured.jpg",
+    "image": "/product1.jpg",
     "hit": true
   },
   {
     "id": "aaa02",
-    "name": "Plant B",
+    "name": "Wash basin",
     "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
-    "type": "Small Plants",
+    "type": "Small Product",
     "amount": 99.0,
-    "image": "/plant2-featured.jpg",
+    "image": "/product2.jpg",
     "hit": true
   },
   {
     "id": "aaa03",
-    "name": "Plant C",
+    "name": "Potted plant",
     "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
-    "type": "Big Plants",
+    "type": "Big Product",
     "amount": 18.9,
-    "image": "/plant3-featured.jpg",
+    "image": "/product3.jpg",
     "hit": true
   },
   {
     "id": "aaa04",
-    "name": "Plant D",
+    "name": "Dining table",
     "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
-    "type": "Small Plants",
+    "type": "Small Product",
     "amount": 220,
-    "image": "/plant4-featured.jpg",
+    "image": "/product4.jpg",
     "hit": true
   },
   {
     "id": "aaa05",
-    "name": "Plant E",
+    "name": "Dressing table",
     "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
-    "type": "Big Plants",
+    "type": "Big Product",
     "amount": 400.0,
-    "image": "/plant5-featured.jpg",
+    "image": "/product5.jpg",
     "hit": false
   },
   {
     "id": "aaa06",
-    "name": "Plant F",
+    "name": "Wall picture",
     "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
-    "type": "Small Plants",
+    "type": "Small Product",
     "amount": 200.0,
-    "image": "/plant6-featured.jpg",
+    "image": "/product6.jpg",
     "hit": false
   },
   {
     "id": "aaa07",
-    "name": "Plant G",
+    "name": "Potted plant",
     "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
-    "type": "Big Plants",
+    "type": "Big Product",
     "amount": 36.8,
-    "image": "/plant7-featured.jpg",
+    "image": "/product7.jpg",
     "hit": false
   },
   {
     "id": "aaa08",
-    "name": "Plant H",
+    "name": "Dining table",
     "desc": "This is a Description.This is a Description.This is a Description.This is a Description.This is a Description.",
-    "type": "Small Plants",
+    "type": "Small Product",
     "amount": 490.0,
-    "image": "/plant8-featured.jpg",
+    "image": "/product8.jpg",
     "hit": false
   }
 ]

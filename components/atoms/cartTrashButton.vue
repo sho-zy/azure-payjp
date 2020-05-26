@@ -30,11 +30,16 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color 0.3s ease-in-out;
 
   svg {
     width: 20px;
     height: 20px;
     fill: darkred;
+  }
+
+  &:hover {
+    background-color: whitesmoke;
   }
 }
 </style>

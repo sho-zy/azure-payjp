@@ -45,14 +45,14 @@ export default {
           items: productItems.filter((item) => item.hit)
         },
         {
-          title: 'Big Plants',
+          title: 'Big Product',
           icon: null,
-          items: productItems.filter((item) => item.type === 'Big Plants')
+          items: productItems.filter((item) => item.type === 'Big Product')
         },
         {
-          title: 'Small Plants',
+          title: 'Small Product',
           icon: null,
-          items: productItems.filter((item) => item.type === 'Small Plants')
+          items: productItems.filter((item) => item.type === 'Small Product')
         }
       ],
       reviews: await require(`~/assets/data/reviewList.json`)
@@ -63,7 +63,7 @@ export default {
       baseUrl: process.env.BASE_URL,
       menuItems: [
         {
-          name: 'Store'
+          name: 'Products'
         },
         {
           name: 'About'

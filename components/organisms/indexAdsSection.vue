@@ -7,8 +7,8 @@
       class="ads-content"
       :style="'background-image: url(' + baseUrl + adsBgImage + ');'"
     >
-      <p class="headline" v-text="'A new home interior for summer'" />
-      <p class="amount" v-text="'from $149.99'" />
+      <p class="headline" v-text="'Announcing new products for the summer.'" />
+      <p class="amount" v-text="'from $78.99'" />
       <p class="ads-link">
         <span class="link">
           <span class="text" v-text="'Discover'" />
@@ -31,8 +31,8 @@ export default {
   },
   data() {
     return {
-      adsImage: '/promo.webp',
-      adsBgImage: '/leaf.svg',
+      adsImage: '/ads.jpg',
+      adsBgImage: '/bg-leaf.png',
       mdiArrowRight
     }
   }

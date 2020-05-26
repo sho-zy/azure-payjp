@@ -39,11 +39,13 @@ export default {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 
   svg {
     width: 30px;
     height: 30px;
     fill: #88dd9b;
+    transition: fill 0.3s ease-in-out;
   }
 
   &:hover {

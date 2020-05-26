@@ -35,7 +35,7 @@
     </h2>
     <p class="action">
       <span class="action-link">
-        <span class="text" v-text="'See all plants'" />
+        <span class="text" v-text="'See All Products'" />
         <svg viewBox="0 0 24 24">
           <path :d="mdiArrowRight" />
         </svg>
@@ -62,8 +62,8 @@ export default {
   data() {
     return {
       appName: process.env.APP_NAME,
-      phrase: ['Real, beautiful plants', 'right to your door'],
-      bgImage: '/header.webp',
+      phrase: ['One for All,', 'All for Japan.'],
+      bgImage: '/bg-header.jpg',
       mdiCartOutline,
       mdiArrowRight,
       mdiMenu
@@ -76,6 +76,7 @@ export default {
   height: 800px;
   width: 100%;
   background-size: cover;
+  background-position: bottom left;
   position: relative;
 
   @media screen and (min-width: 600px) {

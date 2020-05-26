@@ -37,7 +37,7 @@ export default {
     return {
       appName: process.env.APP_NAME,
       cartItems: this.createCartItems(this.$store.state.cartMap),
-      cartImage: '/cart-bg.webp',
+      cartImage: '/bg-leaf.png',
       mdiTrashCanOutline,
       mdiPlus,
       mdiMinus
@@ -90,10 +90,12 @@ export default {
   }
 
   .logo {
-    margin-top: 24px;
-    text-align: center;
+    padding: 24px 24px 0;
     font-size: 32px;
     font-weight: bold;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
   }
 
   .cart-list {

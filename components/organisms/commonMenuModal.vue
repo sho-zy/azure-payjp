@@ -5,6 +5,28 @@
     :style="'background-image: url(' + baseUrl + menuImage + ');'"
   >
     <modalCloseButton />
+    <p class="logo" v-text="appName" />
+    <div class="cart">
+      <svg viewBox="0 0 24 24">
+        <path :d="mdiCartOutline" />
+      </svg>
+      <span
+        class="text"
+        v-text="
+          Object.keys($store.state.cartMap)
+            .reduce((sum, key) => sum + $store.state.cartMap[key], 0)
+            .toString(10) + ' products'
+        "
+      />
+    </div>
+    <p class="action">
+      <button class="action-button" @click="$store.commit('modalOpen', 'cart')">
+        <span class="text" v-text="'Checkout'" />
+        <svg viewBox="0 0 24 24">
+          <path :d="mdiArrowRight" />
+        </svg>
+      </button>
+    </p>
     <ul class="menu-list">
       <li v-for="(item, i) of menuItems" :key="i" class="menu-item">
         <p class="menu-link" v-text="item.name" />
@@ -13,6 +35,7 @@
   </nav>
 </template>
 <script>
+import { mdiCartOutline, mdiArrowRight } from '@mdi/js'
 export default {
   components: {
     modalCloseButton: () => import('~/components/atoms/modalCloseButton.vue')
@@ -29,7 +52,10 @@ export default {
   },
   data() {
     return {
-      menuImage: '/leaf-light-grey.svg'
+      appName: process.env.APP_NAME,
+      menuImage: '/bg-leaf.png',
+      mdiCartOutline,
+      mdiArrowRight
     }
   }
 }
@@ -53,18 +79,74 @@ export default {
     transform: translateX(0);
   }
 
-  .menu-list {
+  .logo {
+    padding: 24px 24px 0;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  .cart {
+    margin-top: 96px;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    svg {
+      width: 36px;
+      height: 36px;
+      fill: black;
+    }
+
+    .text {
+      margin-left: 8px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+
+  .action {
+    margin-top: 16px;
+    text-align: center;
+
+    .action-button {
+      cursor: pointer;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 4px;
+      border: solid 2px #88dd9b;
+      background-color: white;
+      padding: 6px 24px;
+
+      .text {
+        font-size: 20px;
+        color: #88dd9b;
+        font-weight: bolder;
+
+        @media screen and (min-width: 600px) {
+          font-size: 24px;
+        }
+      }
+      svg {
+        width: 30px;
+        height: 30px;
+        fill: #88dd9b;
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .menu-list {
+    margin-top: 64px;
+    display: flex;
+    justify-content: center;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
 
     .menu-item {
       margin: 12px 0;
 
       .menu-link {
+        text-align: center;
         color: black;
         font-size: 30px;
         line-height: 30px;

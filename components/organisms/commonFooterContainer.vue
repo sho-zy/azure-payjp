@@ -7,10 +7,7 @@
           <p class="menu-link" v-text="item.name" />
         </li>
       </ul>
-      <small
-        class="copyright"
-        v-text="'Copyright 2020 ' + appName + ' Inc. All rights reserved.'"
-      />
+      <small class="copyright" v-text="'© 2020 ' + appName + ' '" />
     </footer>
   </div>
 </template>
