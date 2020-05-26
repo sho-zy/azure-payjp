@@ -73,6 +73,11 @@ export default {
         }
       ]
     }
+  },
+  head() {
+    return {
+      script: [{ src: '//js.pay.jp/v2/pay.js' }]
+    }
   }
 }
 </script>
