@@ -1,6 +1,6 @@
 <template>
   <button
-    class="add-icon"
+    class="add-button"
     :aria-label="'カートに追加する'"
     @click.stop="clickCartAction(id)"
   >
@@ -26,25 +26,19 @@ export default {
   methods: {
     clickCartAction(id) {
       this.$store.commit('addCartMap', id)
-      this.$store.commit('setIsCartOpen', true)
+      this.$store.commit('modalOpen', 'cart')
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-.add-icon {
-  position: absolute;
-  top: 230px;
-  right: 12px;
-  width: 56px;
-  height: 56px;
+.add-button {
   background-color: white;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  z-index: 2;
 
   svg {
     width: 30px;

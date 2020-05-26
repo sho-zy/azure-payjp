@@ -1,7 +1,7 @@
 <template>
   <div class="footer-container">
     <footer class="footer">
-      <p class="logo" v-text="title" />
+      <p class="logo" v-text="appName" />
       <ul class="menu-list">
         <li v-for="(item, i) of menuItems" :key="i" class="menu-item">
           <p class="menu-link" v-text="item.name" />
@@ -9,7 +9,7 @@
       </ul>
       <small
         class="copyright"
-        v-text="'Copyright 2019 ' + title + ' Inc. All rights reserved.'"
+        v-text="'Copyright 2020 ' + appName + ' Inc. All rights reserved.'"
       />
     </footer>
   </div>
@@ -17,13 +17,14 @@
 <script>
 export default {
   props: {
-    title: {
-      type: String,
-      default: ''
-    },
     menuItems: {
       type: Array,
       default: () => {}
+    }
+  },
+  data() {
+    return {
+      appName: process.env.APP_NAME
     }
   }
 }

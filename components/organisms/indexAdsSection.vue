@@ -1,0 +1,149 @@
+<template>
+  <section class="ads-section">
+    <div class="ads-image">
+      <img :src="baseUrl + adsImage" class="image" alt="広告" />
+    </div>
+    <div
+      class="ads-content"
+      :style="'background-image: url(' + baseUrl + adsBgImage + ');'"
+    >
+      <p class="headline" v-text="'A new home interior for summer'" />
+      <p class="amount" v-text="'from $149.99'" />
+      <p class="ads-link">
+        <span class="link">
+          <span class="text" v-text="'Discover'" />
+          <svg viewBox="0 0 24 24">
+            <path :d="mdiArrowRight" />
+          </svg>
+        </span>
+      </p>
+    </div>
+  </section>
+</template>
+<script>
+import { mdiArrowRight } from '@mdi/js'
+export default {
+  props: {
+    baseUrl: {
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      adsImage: '/promo.webp',
+      adsBgImage: '/leaf.svg',
+      mdiArrowRight
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.ads-section {
+  display: flex;
+  position: relative;
+  width: 100%;
+
+  &:before {
+    content: '';
+    display: block;
+    padding-top: 30%;
+  }
+
+  .ads-image {
+    width: 50%;
+    background-color: #384647;
+    .image {
+      width: 100%;
+      height: calc(100% - 48px);
+      object-fit: cover;
+    }
+  }
+
+  .ads-content {
+    width: calc(50% - 128px);
+    padding: 64px;
+    margin-top: 48px;
+    background-color: #88dd9b;
+    background-size: cover;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+
+    .headline,
+    .amount,
+    .ads-link {
+      width: 100%;
+    }
+
+    .headline {
+      color: white;
+      font-size: 48px;
+      line-height: 48px;
+      font-weight: bold;
+    }
+
+    .amount {
+      color: white;
+      font-size: 36px;
+    }
+
+    .ads-link {
+      margin-top: 36px;
+
+      .link {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 4px;
+        border: solid 2px white;
+        padding: 4px 16px;
+
+        .text {
+          color: white;
+          font-size: 24px;
+          font-weight: bold;
+        }
+
+        svg {
+          width: 30px;
+          height: 30px;
+          fill: white;
+          margin-left: 12px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 799px) {
+    .ads-image {
+      display: none;
+    }
+
+    .ads-content {
+      width: calc(100% - 128px);
+
+      .headline,
+      .amount,
+      .ads-link {
+        text-align: center;
+      }
+
+      .headline {
+        font-size: 32px;
+      }
+
+      .amount {
+        font-size: 24px;
+      }
+
+      .ads-link {
+        .link {
+          .text {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+</style>

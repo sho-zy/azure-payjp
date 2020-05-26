@@ -1,3 +1,8 @@
+const targetMap = {
+  menu: 'isMenuOpen',
+  cart: 'isCartOpen'
+}
+
 export const state = () => ({
   cartMap: {},
   isCartOpen: false,
@@ -28,13 +33,15 @@ export const mutations = {
       state.cartMap = tempMap
     }
   },
-  setIsCartOpen(state, flag) {
-    state.isCartOpen = flag
-    state.isMenuOpen = false
+  modalOpen(state, target) {
+    Object.keys(targetMap).forEach((key) => {
+      state[targetMap[key]] = key === target
+    })
   },
-  setIsMenuOpen(state, flag) {
-    state.isMenuOpen = flag
-    state.isCartOpen = false
+  modalClose(state) {
+    Object.keys(targetMap).forEach((key) => {
+      state[targetMap[key]] = false
+    })
   }
 }
 
@@ -48,10 +55,10 @@ export const actions = {
   removeCartMap({ commit }, id) {
     commit('removeCartMap', id)
   },
-  setIsCartOpen({ commit }, flag) {
-    commit('setIsCartOpen', flag)
+  modalOpen({ commit }, target) {
+    commit('modalOpen', target)
   },
-  setIsMenuOpen({ commit }, flag) {
-    commit('setIsMenuOpen', flag)
+  modalClose({ commit }) {
+    commit('modalClose')
   }
 }

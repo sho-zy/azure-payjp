@@ -4,16 +4,7 @@
     :class="{ active: $store.state.isCartOpen }"
     :style="'background-image: url(' + baseUrl + cartImage + ');'"
   >
-    <p class="button-container">
-      <button
-        class="close-button"
-        @click="$store.commit('setIsCartOpen', false)"
-      >
-        <svg viewBox="0 0 24 24">
-          <path :d="mdiClose" />
-        </svg>
-      </button>
-    </p>
+    <modalCloseButton />
     <ul class="cart-list">
       <li v-for="(item, i) of cartItems" :key="i" class="cart-item">
         <div class="wrapper">
@@ -33,8 +24,11 @@
   </div>
 </template>
 <script>
-import { mdiClose, mdiTrashCanOutline } from '@mdi/js'
+import { mdiTrashCanOutline } from '@mdi/js'
 export default {
+  components: {
+    modalCloseButton: () => import('~/components/atoms/modalCloseButton.vue')
+  },
   props: {
     baseUrl: {
       type: String,
@@ -49,7 +43,6 @@ export default {
     return {
       cartItems: this.createCartItems(this.$store.state.cartMap),
       cartImage: '/cart-bg.webp',
-      mdiClose,
       mdiTrashCanOutline
     }
   },
@@ -100,27 +93,6 @@ export default {
 
   &.active {
     transform: translateX(0);
-  }
-
-  .button-container {
-    position: absolute;
-    top: 32px;
-    right: 16px;
-
-    @media screen and (min-width: 600px) {
-      top: 32px;
-      right: 32px;
-    }
-
-    .close-button {
-      cursor: pointer;
-
-      svg {
-        width: 40px;
-        height: 40px;
-        fill: black;
-      }
-    }
   }
 
   .cart-list {

@@ -4,16 +4,7 @@
     :class="{ active: $store.state.isMenuOpen }"
     :style="'background-image: url(' + baseUrl + menuImage + ');'"
   >
-    <p class="button-container">
-      <button
-        class="close-button"
-        @click="$store.commit('setIsMenuOpen', false)"
-      >
-        <svg viewBox="0 0 24 24">
-          <path :d="mdiClose" />
-        </svg>
-      </button>
-    </p>
+    <modalCloseButton />
     <ul class="menu-list">
       <li v-for="(item, i) of menuItems" :key="i" class="menu-item">
         <p class="menu-link" v-text="item.name" />
@@ -22,8 +13,10 @@
   </nav>
 </template>
 <script>
-import { mdiClose } from '@mdi/js'
 export default {
+  components: {
+    modalCloseButton: () => import('~/components/atoms/modalCloseButton.vue')
+  },
   props: {
     baseUrl: {
       type: String,
@@ -36,8 +29,7 @@ export default {
   },
   data() {
     return {
-      menuImage: '/leaf-light-grey.svg',
-      mdiClose
+      menuImage: '/leaf-light-grey.svg'
     }
   }
 }
@@ -59,22 +51,6 @@ export default {
 
   &.active {
     transform: translateX(0);
-  }
-
-  .button-container {
-    position: absolute;
-    top: 32px;
-    right: 16px;
-
-    .close-button {
-      cursor: pointer;
-
-      svg {
-        width: 40px;
-        height: 40px;
-        fill: black;
-      }
-    }
   }
 
   .menu-list {
