@@ -35,6 +35,9 @@ export const mutations = {
       state.cartMap = tempMap
     }
   },
+  initCartMap(state) {
+    state.cartMap = {}
+  },
   modalOpen(state, target) {
     Object.keys(targetMap).forEach((key) => {
       state[targetMap[key]] = key === target
@@ -56,6 +59,9 @@ export const actions = {
   },
   removeCartMap({ commit }, id) {
     commit('removeCartMap', id)
+  },
+  initCartMap({ commit }) {
+    commit('initCartMap')
   },
   modalOpen({ commit }, target) {
     commit('modalOpen', target)
