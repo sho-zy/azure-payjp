@@ -6,15 +6,16 @@
         <p v-text="'$' + totalPrice.toFixed(2).toLocaleString()" />
       </div>
       <div class="button-container">
-        <payjp-checkout
-          :api-key="payjpPk"
-          text="Checkout"
-          class="payjp-button"
-          submit-text="テストカードで支払い"
-          @created="onTokenCreated"
-          @failed="onTokenFailed"
-        >
-        </payjp-checkout>
+        <client-only>
+          <payjp-checkout
+            :api-key="payjpPk"
+            text="Checkout"
+            class="payjp-button"
+            submit-text="テストカードで支払い"
+            @created="onTokenCreated"
+            @failed="onTokenFailed"
+          />
+        </client-only>
         <button
           :disabled="totalPrice === 0"
           class="pay-button"
