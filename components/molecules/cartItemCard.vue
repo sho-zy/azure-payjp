@@ -51,10 +51,15 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     overflow: hidden;
     border-radius: 8px;
+
+    @media screen and (min-width: 600px) {
+      width: 120px;
+      height: 120px;
+    }
 
     .image {
       width: 100%;
@@ -70,17 +75,27 @@ export default {
   }
 
   .name {
-    width: calc(100% - 210px);
-    padding: 0 54px 0 156px;
+    width: calc(100% - 170px);
+    padding: 0 54px 0 116px;
     font-size: 22px;
+
+    @media screen and (min-width: 600px) {
+      width: calc(100% - 156px);
+      padding: 0 0 0 156px;
+    }
   }
 
   .desc {
     margin-top: 8px;
-    width: calc(100% - 156px);
-    padding: 0 0 0 156px;
+    width: calc(100% - 116px);
+    padding: 0 0 0 116px;
     font-size: 14px;
     font-weight: lighter;
+
+    @media screen and (min-width: 600px) {
+      width: calc(100% - 156px);
+      padding: 0 0 0 156px;
+    }
   }
 
   .info {
