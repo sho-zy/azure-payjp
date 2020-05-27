@@ -1,7 +1,7 @@
 module.exports = async function(context, req) {
-  const payjp = require('payjp')(process.env.PAYJP_SK)
   let isNoramal = false
   try {
+    const payjp = require('payjp')(process.env.PAYJP_SK)
     const result = await payjp.charges.create({
       amount: req.body.amount,
       currency: 'jpy',
@@ -14,6 +14,7 @@ module.exports = async function(context, req) {
   }
 
   context.res = {
+    status: isNoramal ? 200 : 500,
     body: isNoramal ? 'NORMAL' : 'ERROR'
   }
   context.done()
