@@ -1,21 +1,14 @@
 <template>
-  <carousel
-    :mouse-drag="true"
-    :scroll-per-page="false"
-    :pagination-enabled="false"
-    class="carousel-list"
-  >
-    <slide v-for="(item, j) of items" :key="j" class="carousel-item">
+  <ul class="carousel-list">
+    <li v-for="(item, j) of items" :key="j" class="carousel-item">
       <productCard :item="item" :base-url="baseUrl" />
       <productCartButton :id="item.id" class="button" />
-    </slide>
-  </carousel>
+    </li>
+  </ul>
 </template>
 <script>
 export default {
   components: {
-    Carousel: () => import('vue-carousel/src/Carousel.vue'),
-    Slide: () => import('vue-carousel/src/Slide.vue'),
     productCard: () => import('~/components/atoms/productCard.vue'),
     productCartButton: () => import('~/components/atoms/productCartButton.vue')
   },
@@ -35,16 +28,19 @@ export default {
 .carousel-list {
   display: flex;
   align-items: center;
+  padding-bottom: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 
   .carousel-item {
     position: relative;
     max-width: 300px;
-    margin: 0 8px;
+    padding: 0 8px;
 
     .button {
       position: absolute;
       top: 230px;
-      right: 12px;
+      right: 20px;
       width: 56px;
       height: 56px;
     }

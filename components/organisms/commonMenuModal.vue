@@ -86,7 +86,7 @@ export default {
   }
 
   .cart {
-    margin-top: 96px;
+    margin-top: 72px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -137,7 +137,7 @@ export default {
   }
 
   .menu-list {
-    margin-top: 64px;
+    margin: 64px 0 72px;
     display: flex;
     justify-content: center;
     flex-direction: column;

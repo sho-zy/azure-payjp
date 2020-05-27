@@ -142,7 +142,7 @@ export default {
   justify-content: flex-end;
   width: calc(100% - 32px);
   max-width: 1300px;
-  margin: 0 auto 24px;
+  margin: 0 auto 72px;
   padding: 0 16px;
 
   .wrapper {

@@ -93,7 +93,7 @@ export default {
     padding: 24px 24px 0;
     font-size: 32px;
     font-weight: bold;
-    width: 100%;
+    width: calc(100% - 48px);
     max-width: 1300px;
     margin: 0 auto;
   }
