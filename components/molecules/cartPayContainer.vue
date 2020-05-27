@@ -58,7 +58,6 @@ export default {
     return {
       mdiLoading,
       mdiCheckCircleOutline,
-      payjpPk: process.env.PAYJP_PK,
       message: '',
       token: '',
       isLoading: false,
@@ -71,7 +70,7 @@ export default {
     }
   },
   mounted() {
-    const payjp = window.Payjp(this.payjpPk)
+    const payjp = window.Payjp('pk_test_cdabcdda7155614fe7f68cf6')
     const elements = payjp.elements()
     const cardElement = elements.create('card')
     cardElement.mount('#payjp-form')

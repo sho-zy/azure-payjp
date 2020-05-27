@@ -30,5 +30,4 @@ jobs:
           APP_DESC: ${{ secrets.APP_DESC }}
           APP_NAME: ${{ secrets.APP_NAME }}
           BASE_URL: ${{ secrets.BASE_URL }}
-          PAYJP_PK: ${{ secrets.PAYJP_PK }}
           PAYJP_SK: ${{ secrets.PAYJP_SK }}
