@@ -1,11 +1,13 @@
 require('dotenv').config()
+const { BASE_URL, API_URL, APP_NAME, APP_DESC } = process.env
+
 export default {
   mode: 'universal',
   /*
    ** Headers of the page
    */
   head: {
-    title: process.env.APP_NAME,
+    title: APP_NAME,
     meta: [
       { charset: 'utf-8' },
       {
@@ -16,7 +18,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.APP_DESC
+        content: APP_DESC
       },
       {
         hid: 'twitter:card',
@@ -26,7 +28,7 @@ export default {
       {
         hid: 'og:site_name',
         property: 'og:site_name',
-        content: process.env.APP_NAME
+        content: APP_NAME
       },
       {
         hid: 'og:type',
@@ -36,22 +38,22 @@ export default {
       {
         hid: 'og:title',
         property: 'og:title',
-        content: process.env.APP_NAME
+        content: APP_NAME
       },
       {
         hid: 'og:url',
         property: 'og:url',
-        content: process.env.BASE_URL + '/'
+        content: BASE_URL + '/'
       },
       {
         hid: 'og:description',
         property: 'og:description',
-        content: process.env.APP_DESC
+        content: APP_DESC
       },
       {
         hid: 'og:image',
         property: 'og:image',
-        content: process.env.BASE_URL + '/icon.png'
+        content: BASE_URL + '/icon.png'
       },
       {
         hid: 'og:locale',
@@ -66,7 +68,7 @@ export default {
       {
         hid: 'author',
         name: 'author',
-        content: process.env.APP_NAME
+        content: APP_NAME
       },
       {
         hid: 'robots',
@@ -81,14 +83,14 @@ export default {
       {
         hid: 'msapplication-TileImage',
         name: 'msapplication-TileImage',
-        content: process.env.BASE_URL + '/icon.png'
+        content: BASE_URL + '/icon.png'
       }
     ],
     link: [
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: process.env.BASE_URL + '/favicon.ico'
+        href: BASE_URL + '/favicon.ico'
       }
     ],
     script: [{ src: '//js.pay.jp/v2/pay.js' }]
@@ -134,5 +136,11 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  env: {
+    BASE_URL,
+    API_URL,
+    APP_NAME,
+    APP_DESC
   }
 }
