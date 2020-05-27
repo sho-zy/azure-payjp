@@ -90,7 +90,8 @@ export default {
         type: 'image/x-icon',
         href: process.env.BASE_URL + '/favicon.ico'
       }
-    ]
+    ],
+    script: [{ src: '//js.pay.jp/v2/pay.js' }]
   },
   /*
    ** Customize the progress-bar color

@@ -19,7 +19,6 @@
     "nuxt": "^2.0.0",
     "sass-loader": "^8.0.2",
     "vue-carousel": "^0.18.0",
-    "vue-payjp-checkout": "^0.0.1-alpha.4",
     "vuex-persistedstate": "^3.0.1"
   },
   "devDependencies": {

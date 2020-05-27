@@ -99,7 +99,7 @@ export default {
   }
 
   .cart-list {
-    width: 100%;
+    width: calc(100% - 48px);
     max-width: 1300px;
     margin: 32px auto 0;
 

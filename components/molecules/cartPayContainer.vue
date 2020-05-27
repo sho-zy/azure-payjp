@@ -5,27 +5,17 @@
         <p v-text="'Total'" />
         <p v-text="'$' + totalPrice.toFixed(2).toLocaleString()" />
       </div>
-      <div class="button-container">
-        <payjp-checkout
-          v-if="$store.state.isCartOpen"
-          :api-key="payjpPk"
-          text="Checkout"
-          class="payjp-button"
-          submit-text="テストカードで支払い"
-          @created="onTokenCreated"
-          @failed="onTokenFailed"
-        />
+      <div class="form-container">
+        <h2 class="header" v-text="'Invoice'" />
+        <div id="payjp-form" />
         <button
-          :disabled="totalPrice === 0"
+          :disabled="totalPrice === 0 || !token || token === ''"
           class="pay-button"
-          :class="{ active: totalPrice !== 0 }"
+          :class="{ active: totalPrice !== 0 && token && token !== '' }"
           aria-label="Checkout"
-          @click="clickPayButton"
+          @click="clickCheckoutButton"
         >
           <span class="text" v-text="'Checkout'" />
-          <svg viewBox="0 0 24 24">
-            <path :d="mdiArrowRight" />
-          </svg>
         </button>
         <div
           v-if="message && message !== ''"
@@ -56,11 +46,8 @@
   </div>
 </template>
 <script>
-import { mdiArrowRight, mdiLoading, mdiCheckCircleOutline } from '@mdi/js'
+import { mdiLoading, mdiCheckCircleOutline } from '@mdi/js'
 export default {
-  components: {
-    PayjpCheckout: () => import('vue-payjp-checkout')
-  },
   props: {
     items: {
       type: Array,
@@ -69,11 +56,10 @@ export default {
   },
   data() {
     return {
-      mdiArrowRight,
       mdiLoading,
       mdiCheckCircleOutline,
-      payjpPk: process.env.PAYJP_PK,
       message: '',
+      token: '',
       isLoading: false,
       isCompleted: false
     }
@@ -83,13 +69,41 @@ export default {
       return this.items.reduce((sum, item) => sum + item.subTotal, 0)
     }
   },
+  mounted() {
+    const payjp = window.Payjp(process.env.PAYJP_PK)
+    const elements = payjp.elements()
+    const cardElement = elements.create('card')
+    cardElement.mount('#payjp-form')
+    cardElement.on('change', async (event) => {
+      if (event.error) {
+        this.message = event.error.message
+        return
+      }
+
+      if (event.complete) {
+        try {
+          const res = await payjp.createToken(cardElement)
+          if (res.error) {
+            this.message = res.error.message
+            this.token = ''
+          } else {
+            this.message = ''
+            this.token = res.id
+          }
+        } catch (error) {
+          if (process.env.NODE_ENV !== 'production') {
+            // eslint-disable-next-line no-console
+            console.log(error)
+          }
+          this.message = '入力が不正です。'
+          this.token = ''
+        }
+      }
+    })
+  },
   methods: {
-    clickPayButton() {
-      const elements = document.getElementById('payjp_checkout_box').children
-      if (elements && elements.length > 0) elements[0].click()
-    },
-    async onTokenCreated(res) {
-      if (!res || !res.id || res.id === '') {
+    async clickCheckoutButton() {
+      if (!this.token || this.token === '') {
         this.message = '決済に失敗しました。'
         return
       }
@@ -99,12 +113,13 @@ export default {
       try {
         const chargeResult = await axios.post(`${process.env.API_URL}/charge`, {
           amount: this.totalPrice * 110, // USD/JPY
-          token: res.id
+          token: this.token
         })
         if (!chargeResult || chargeResult.data !== 'NORMAL') {
           throw new Error('決済エラー')
         } else {
           this.message = ''
+          this.token = ''
           this.isCompleted = true
         }
       } catch (error) {
@@ -112,9 +127,6 @@ export default {
       } finally {
         this.isLoading = false
       }
-    },
-    onTokenFailed() {
-      this.message = '決済に失敗しました。'
     },
     clickCompleteButton() {
       this.isCompleted = false
@@ -128,17 +140,17 @@ export default {
 .pay-container {
   display: flex;
   justify-content: flex-end;
-  width: calc(100% - 64px);
+  width: calc(100% - 32px);
   max-width: 1300px;
   margin: 0 auto 24px;
-  padding: 0 32px;
+  padding: 0 16px;
 
   .wrapper {
     width: 100%;
 
     @media screen and (min-width: 800px) {
       width: 100%;
-      max-width: 360px;
+      max-width: 400px;
     }
 
     .total {
@@ -148,55 +160,38 @@ export default {
       padding: 0 12px;
     }
 
-    .button-container {
-      padding: 0 12px;
+    .form-container {
       margin-top: 24px;
       text-align: right;
       position: relative;
+      padding: 12px 12px 18px;
+      background-color: white;
 
-      .payjp-button {
-        display: none;
+      .header {
+        font-size: 20px;
+        padding-left: 8px;
+        text-align: left;
+        margin-bottom: 12px;
       }
 
       .pay-button {
         display: inline-flex;
         align-items: center;
         padding: 8px 48px;
+        margin-top: 12px;
         border-radius: 8px;
         background-color: darkgrey;
         border: solid 1px darkgrey;
-        transition: background-color 0.3s ease-in-out;
 
         .text {
           color: white;
           font-size: 18px;
-          transition: color 0.3s ease-in-out;
-        }
-
-        svg {
-          margin-left: 4px;
-          width: 20px;
-          height: 20px;
-          fill: white;
-          transition: fill 0.3s ease-in-out;
         }
 
         &.active {
           cursor: pointer;
           background-color: #88dd9b;
           border: solid 1px #88dd9b;
-
-          &:hover {
-            background-color: white;
-
-            .text {
-              color: #88dd9b;
-            }
-
-            svg {
-              fill: #88dd9b;
-            }
-          }
         }
       }
 
