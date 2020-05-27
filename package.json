@@ -9,7 +9,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "api": "cd api && yarn install && sed -i '' -e 's/process\\.env\\.PAYJP_SK/'\\''$PAYJP_SK'\\''/g' charge/index.js",
+    "api": "cd api && yarn install && sed -i '' -e 's/process\\.env\\.PAYJP_SK/'\\''$PAYJP_SK'\\''/g' charge/index.js && cd ..",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
