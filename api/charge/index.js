@@ -1,5 +1,4 @@
 module.exports = async function(context, req) {
-  let isNoramal = false
   try {
     const payjp = require('payjp')(process.env.PAYJP_SK)
     const result = await payjp.charges.create({
@@ -7,15 +6,19 @@ module.exports = async function(context, req) {
       currency: 'jpy',
       card: req.body.token
     })
-    isNoramal = result && result.paid
+    if (result && result.paid) {
+      context.res = {
+        body: 'NORMAL'
+      }
+    } else {
+      throw new Error(result.error.message)
+    }
   } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error)
+    context.res = {
+      status: 500,
+      body: error.message
+    }
   }
 
-  context.res = {
-    status: isNoramal ? 200 : 500,
-    body: isNoramal ? 'NORMAL' : 'ERROR'
-  }
   context.done()
 }
