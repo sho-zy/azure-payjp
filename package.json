@@ -8,7 +8,7 @@
     "dev": "func start --script-root api & nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate",
+    "generate": "cd api && yarn install && cd .. && nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
@@ -17,7 +17,6 @@
     "@nuxtjs/pwa": "^3.0.0-0",
     "node-sass": "^4.14.1",
     "nuxt": "^2.0.0",
-    "payjp": "^2.0.4",
     "sass-loader": "^8.0.2",
     "vue-carousel": "^0.18.0",
     "vuex-persistedstate": "^3.0.1"
