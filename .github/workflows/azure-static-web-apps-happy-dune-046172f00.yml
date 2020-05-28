@@ -27,3 +27,7 @@ jobs:
           APP_DESC: ${{ secrets.APP_DESC }}
           APP_NAME: ${{ secrets.APP_NAME }}
           BASE_URL: ${{ secrets.BASE_URL }}
+          COSMOS_EP: ${{ secrets.COSMOS_EP }}
+          COSMOS_KEY: ${{ secrets.COSMOS_KEY }}
+          COSMOS_DB: ${{ secrets.COSMOS_DB }}
+          COSMOS_CONTAINER: ${{ secrets.COSMOS_CONTAINER }}
