@@ -1,14 +1,12 @@
 {
   "name": "azure-payjp",
   "version": "1.0.0",
-  "description": "My praiseworthy Nuxt.js project",
+  "description": "This project is a JAMstack EC demo site using Azure Static Web Apps, Nuxt.js, PAY.JP.",
   "author": "sho-zy",
   "private": true,
   "scripts": {
     "dev": "func start --script-root api & nuxt",
     "build": "nuxt generate",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {

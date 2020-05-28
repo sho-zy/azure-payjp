@@ -1,22 +1,20 @@
 # azure-payjp
 
-> My praiseworthy Nuxt.js project
+> This project is a JAMstack EC demo site using Azure Static Web Apps, Nuxt.js, PAY.JP.
 
 ## Build Setup
 
 ```bash
-# install dependencies
+# install dependencies (App)
 $ yarn install
 
-# serve with hot reload at localhost:3000
+# install dependencies (Api)
+$ cd api
+$ yarn install
+
+# serve with hot reload at localhost:3000(App), and localhost:7071(Api)
 $ yarn dev
 
-# build for production and launch server
-$ yarn build
-$ yarn start
-
 # generate static project
-$ yarn generate
+$ yarn build
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
