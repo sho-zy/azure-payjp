@@ -35,7 +35,6 @@ export default {
       import('~/components/organisms/commonFooterContainer.vue')
   },
   async asyncData({ payload, env }) {
-    console.log('get data from ' + (payload ? 'payload' : 'cosmos'))
     const getData = async () => {
       if (payload) return payload
       const module = require('../modules/getCosmosData')
