@@ -1,5 +1,14 @@
 require('dotenv').config()
-const { BASE_URL, API_URL, APP_NAME, APP_DESC } = process.env
+const {
+  BASE_URL,
+  API_URL,
+  APP_NAME,
+  APP_DESC,
+  COSMOS_EP,
+  COSMOS_KEY,
+  COSMOS_DB,
+  COSMOS_CONTAINER
+} = process.env
 
 export default {
   mode: 'universal',
@@ -142,5 +151,21 @@ export default {
     API_URL,
     APP_NAME,
     APP_DESC
+  },
+  generate: {
+    async routes() {
+      const module = require('./modules/getCosmosData')
+      return [
+        {
+          route: '/',
+          payload: await module.getCosmosData(
+            COSMOS_EP,
+            COSMOS_KEY,
+            COSMOS_DB,
+            COSMOS_CONTAINER
+          )
+        }
+      ]
+    }
   }
 }

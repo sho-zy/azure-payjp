@@ -5,7 +5,7 @@
     </p>
     <cartTrashButton :id="item.id" />
     <p class="name" v-text="item.name" />
-    <p class="desc" v-text="item.desc" />
+    <p class="desc" v-text="item.description" />
     <div class="info">
       <div class="amount">
         <p class="text" v-text="'Quantity'" />

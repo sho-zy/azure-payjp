@@ -34,28 +34,39 @@ export default {
     commonFooterContainer: () =>
       import('~/components/organisms/commonFooterContainer.vue')
   },
-  async asyncData({ params, error, payload }) {
-    const productItems = await require(`~/assets/data/productList.json`)
+  async asyncData({ payload, env }) {
+    console.log('get data from ' + (payload ? 'payload' : 'cosmos'))
+    const getData = async () => {
+      if (payload) return payload
+      const module = require('../modules/getCosmosData')
+      return await module.getCosmosData(
+        env.COSMOS_EP,
+        env.COSMOS_KEY,
+        env.COSMOS_DB,
+        env.COSMOS_CONTAINER
+      )
+    }
+    const data = await getData()
     return {
-      productItems,
+      productItems: data.products,
       products: [
         {
           title: 'Best sellers',
           icon: mdiCardsHeart,
-          items: productItems.filter((item) => item.hit)
+          items: data.products.filter((item) => item.hit)
         },
         {
           title: 'Big Product',
           icon: null,
-          items: productItems.filter((item) => item.type === 'Big Product')
+          items: data.products.filter((item) => item.type === 'Big Product')
         },
         {
           title: 'Small Product',
           icon: null,
-          items: productItems.filter((item) => item.type === 'Small Product')
+          items: data.products.filter((item) => item.type === 'Small Product')
         }
       ],
-      reviews: await require(`~/assets/data/reviewList.json`)
+      reviews: data.reviews
     }
   },
   data() {
