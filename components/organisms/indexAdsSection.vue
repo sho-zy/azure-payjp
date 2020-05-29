@@ -2,14 +2,24 @@
   <section class="ads-section">
     <div class="ads-image">
       <picture>
-        <source :srcset="baseUrl + adsImage + '.webp'" type="image/webp" />
-        <img :src="baseUrl + adsImage + '.jpg'" class="image" alt="広告" />
+        <source :data-srcset="baseUrl + adsImage + '.webp'" type="image/webp" />
+        <img :data-src="baseUrl + adsImage + '.jpg'" class="image" alt="広告" />
       </picture>
     </div>
-    <div
-      class="ads-content"
-      :style="'background-image: url(' + baseUrl + adsBgImage + ');'"
-    >
+    <div class="ads-content">
+      <div class="bg">
+        <picture>
+          <source
+            :data-srcset="baseUrl + adsBgImage + '.webp'"
+            type="image/webp"
+          />
+          <img
+            :data-src="baseUrl + adsBgImage + '.jpg'"
+            class="image"
+            alt="広告背景"
+          />
+        </picture>
+      </div>
       <p class="headline" v-text="'Announcing new products for the summer.'" />
       <p class="amount" v-text="'from $78.99'" />
       <p class="ads-link">
@@ -35,7 +45,7 @@ export default {
   data() {
     return {
       adsImage: '/ads',
-      adsBgImage: '/bg-leaf.png',
+      adsBgImage: '/bg-leaf',
       mdiArrowRight
     }
   }
@@ -72,10 +82,28 @@ export default {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
+    position: relative;
+
+    .bg {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+
+      .image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
 
     .headline,
     .amount,
     .ads-link {
+      position: relative;
       width: 100%;
     }
 

@@ -2,9 +2,14 @@
   <div class="product-link">
     <p class="product-image">
       <picture>
-        <source :srcset="baseUrl + item.image + '.webp'" type="image/webp" />
+        <source
+          :data-srcset="item.hit ? null : baseUrl + item.image + '.webp'"
+          :srcset="item.hit ? baseUrl + item.image + '.webp' : null"
+          type="image/webp"
+        />
         <img
-          :src="baseUrl + item.image + '.jpg'"
+          :data-src="item.hit ? null : baseUrl + item.image + '.jpg'"
+          :src="item.hit ? baseUrl + item.image + '.jpg' : null"
           :alt="item.name"
           class="image"
         />

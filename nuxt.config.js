@@ -123,7 +123,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/vuex-persistedstate.js', mode: 'client' }],
+  plugins: [
+    { src: '~/plugins/vuex-persistedstate.js', mode: 'client' },
+    { src: '~/plugins/custom-lasyload.js', mode: 'client' }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
