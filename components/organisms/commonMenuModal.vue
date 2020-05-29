@@ -1,10 +1,12 @@
 <template>
-  <nav
-    class="menu-modal"
-    :class="{ active: $store.state.isMenuOpen }"
-    :style="'background-image: url(' + baseUrl + menuImage + ');'"
-  >
-    <modalCloseButton />
+  <nav class="menu-modal" :class="{ active: $store.state.isMenuOpen }">
+    <div v-if="$store.state.isMenuOpen" class="bg">
+      <picture>
+        <source :srcset="baseUrl + '/bg-leaf.webp'" type="image/webp" />
+        <img :src="baseUrl + '/bg-leaf.jpg'" class="image" alt="背景" />
+      </picture>
+    </div>
+    <modalCloseButton class="close-button" />
     <p class="logo" v-text="appName" />
     <div class="cart">
       <svg viewBox="0 0 24 24">
@@ -57,7 +59,6 @@ export default {
   data() {
     return {
       appName: process.env.APP_NAME,
-      menuImage: '/bg-leaf.png',
       mdiCartOutline,
       mdiArrowRight
     }
@@ -83,10 +84,32 @@ export default {
     transform: translateX(0);
   }
 
+  .bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+
+    .image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .close-button {
+    z-index: 2;
+  }
+
   .logo {
     padding: 24px 24px 0;
     font-size: 32px;
     font-weight: bold;
+    position: relative;
   }
 
   .cart {
@@ -94,6 +117,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 
     svg {
       width: 36px;
@@ -111,6 +135,7 @@ export default {
   .action {
     margin-top: 16px;
     text-align: center;
+    position: relative;
 
     .action-button {
       cursor: pointer;
@@ -145,6 +170,7 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    position: relative;
 
     .menu-item {
       margin: 12px 0;

@@ -1,8 +1,11 @@
 <template>
-  <div
-    class="header-container"
-    :style="'background-image: url(' + baseUrl + bgImage + ');'"
-  >
+  <div class="header-container">
+    <div class="bg">
+      <picture>
+        <source :srcset="baseUrl + '/bg-header.webp'" type="image/webp" />
+        <img :src="baseUrl + '/bg-header.jpg'" class="image" alt="インテリア" />
+      </picture>
+    </div>
     <div class="wrapper" />
     <header class="header">
       <h1 class="logo" v-text="appName" />
@@ -63,7 +66,6 @@ export default {
     return {
       appName: process.env.APP_NAME,
       phrase: ['One for All,', 'All for Japan.'],
-      bgImage: '/bg-header.jpg',
       mdiCartOutline,
       mdiArrowRight,
       mdiMenu
@@ -83,15 +85,26 @@ export default {
     height: 896px;
   }
 
+  .bg,
   .wrapper {
     position: absolute;
-    content: '';
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
     height: 100%;
+  }
+
+  .bg {
+    .image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .wrapper {
     background-color: rgba(0, 0, 0, 0.3);
   }
 

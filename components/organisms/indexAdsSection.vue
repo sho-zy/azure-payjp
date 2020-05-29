@@ -2,19 +2,16 @@
   <section class="ads-section">
     <div class="ads-image">
       <picture>
-        <source :data-srcset="baseUrl + adsImage + '.webp'" type="image/webp" />
-        <img :data-src="baseUrl + adsImage + '.jpg'" class="image" alt="広告" />
+        <source :data-srcset="baseUrl + '/ads.webp'" type="image/webp" />
+        <img :data-src="baseUrl + '/ads.jpg'" class="image" alt="広告" />
       </picture>
     </div>
     <div class="ads-content">
       <div class="bg">
         <picture>
-          <source
-            :data-srcset="baseUrl + adsBgImage + '.webp'"
-            type="image/webp"
-          />
+          <source :data-srcset="baseUrl + '/bg-leaf.webp'" type="image/webp" />
           <img
-            :data-src="baseUrl + adsBgImage + '.jpg'"
+            :data-src="baseUrl + '/bg-leaf.jpg'"
             class="image"
             alt="広告背景"
           />
@@ -44,8 +41,6 @@ export default {
   },
   data() {
     return {
-      adsImage: '/ads',
-      adsBgImage: '/bg-leaf',
       mdiArrowRight
     }
   }

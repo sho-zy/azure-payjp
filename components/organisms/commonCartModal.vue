@@ -1,10 +1,12 @@
 <template>
-  <div
-    class="cart-modal"
-    :class="{ active: $store.state.isCartOpen }"
-    :style="'background-image: url(' + baseUrl + cartImage + ');'"
-  >
-    <modalCloseButton />
+  <div class="cart-modal" :class="{ active: $store.state.isCartOpen }">
+    <div v-if="$store.state.isCartOpen" class="bg">
+      <picture>
+        <source :srcset="baseUrl + '/bg-leaf.webp'" type="image/webp" />
+        <img :src="baseUrl + '/bg-leaf.jpg'" class="image" alt="背景" />
+      </picture>
+    </div>
+    <modalCloseButton class="close-button" />
     <p class="logo" v-text="appName" />
     <ul class="cart-list">
       <li v-for="(item, i) of cartItems" :key="i" class="cart-item">
@@ -37,7 +39,6 @@ export default {
     return {
       appName: process.env.APP_NAME,
       cartItems: this.createCartItems(this.$store.state.cartMap),
-      cartImage: '/bg-leaf.png',
       mdiTrashCanOutline,
       mdiPlus,
       mdiMinus
@@ -89,6 +90,27 @@ export default {
     transform: translateX(0);
   }
 
+  .bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+
+    .image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .close-button {
+    z-index: 2;
+  }
+
   .logo {
     padding: 24px 24px 0;
     font-size: 32px;
@@ -96,12 +118,14 @@ export default {
     width: calc(100% - 48px);
     max-width: 1300px;
     margin: 0 auto;
+    position: relative;
   }
 
   .cart-list {
     width: calc(100% - 48px);
     max-width: 1300px;
     margin: 32px auto 0;
+    position: relative;
 
     .cart-item {
       min-height: 120px;
