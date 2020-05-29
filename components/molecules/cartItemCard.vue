@@ -1,7 +1,14 @@
 <template>
   <div class="card-container">
     <p class="product-image">
-      <img :src="baseUrl + item.image" :alt="item.name" class="image" />
+      <picture>
+        <source :srcset="baseUrl + item.image + '.webp'" type="image/webp" />
+        <img
+          :src="baseUrl + item.image + '.jpg'"
+          :alt="item.name"
+          class="image"
+        />
+      </picture>
     </p>
     <cartTrashButton :id="item.id" />
     <p class="name" v-text="item.name" />

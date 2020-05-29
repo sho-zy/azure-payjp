@@ -1,7 +1,14 @@
 <template>
   <div class="product-link">
     <p class="product-image">
-      <img :src="baseUrl + item.image" :alt="item.name" class="image" />
+      <picture>
+        <source :srcset="baseUrl + item.image + '.webp'" type="image/webp" />
+        <img
+          :src="baseUrl + item.image + '.jpg'"
+          :alt="item.name"
+          class="image"
+        />
+      </picture>
     </p>
     <p class="title" v-text="item.name" />
     <p class="type" v-text="item.type" />

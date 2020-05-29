@@ -1,5 +1,9 @@
 <template>
-  <button class="close-button" @click="$store.commit('modalClose')">
+  <button
+    class="close-button"
+    aria-label="閉じる"
+    @click="$store.commit('modalClose')"
+  >
     <svg viewBox="0 0 24 24">
       <path :d="mdiClose" />
     </svg>

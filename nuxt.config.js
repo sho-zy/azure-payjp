@@ -100,9 +100,17 @@ export default {
         rel: 'icon',
         type: 'image/x-icon',
         href: BASE_URL + '/favicon.ico'
+      },
+      {
+        rel: 'preconnect',
+        href: '//js-agent.newrelic.com'
+      },
+      {
+        rel: 'preconnect',
+        href: '//cdn.jsdelivr.net'
       }
     ],
-    script: [{ src: '//js.pay.jp/v2/pay.js' }]
+    script: [{ src: '//js.pay.jp/v2/pay.js', async: true }]
   },
   /*
    ** Customize the progress-bar color
@@ -115,7 +123,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/localStorage.js', mode: 'client' }],
+  plugins: [{ src: '~/plugins/vuex-persistedstate.js', mode: 'client' }],
   /*
    ** Nuxt.js dev-modules
    */

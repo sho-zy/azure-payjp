@@ -125,7 +125,7 @@ export default {
         align-items: center;
         margin-right: 32px;
 
-        @media screen and (min-width: 600px) {
+        @media screen and (min-width: 720px) {
           display: flex;
         }
 
@@ -142,7 +142,7 @@ export default {
 
       .menu-button {
         margin-left: 8px;
-        @media screen and (min-width: 600px) {
+        @media screen and (min-width: 720px) {
           display: none;
         }
       }

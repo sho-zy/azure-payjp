@@ -20,7 +20,11 @@
       />
     </div>
     <p class="action">
-      <button class="action-button" @click="$store.commit('modalOpen', 'cart')">
+      <button
+        class="action-button"
+        aria-label="カート"
+        @click="$store.commit('modalOpen', 'cart')"
+      >
         <span class="text" v-text="'Checkout'" />
         <svg viewBox="0 0 24 24">
           <path :d="mdiArrowRight" />

@@ -1,5 +1,9 @@
 <template>
-  <button class="trash-button" @click="$store.commit('removeCartMap', id)">
+  <button
+    class="trash-button"
+    aria-label="商品削除"
+    @click="$store.commit('removeCartMap', id)"
+  >
     <svg viewBox="0 0 24 24">
       <path :d="mdiTrashCanOutline" />
     </svg>

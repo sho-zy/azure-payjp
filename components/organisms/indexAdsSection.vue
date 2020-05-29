@@ -1,7 +1,10 @@
 <template>
   <section class="ads-section">
     <div class="ads-image">
-      <img :src="baseUrl + adsImage" class="image" alt="広告" />
+      <picture>
+        <source :srcset="baseUrl + adsImage + '.webp'" type="image/webp" />
+        <img :src="baseUrl + adsImage + '.jpg'" class="image" alt="広告" />
+      </picture>
     </div>
     <div
       class="ads-content"
@@ -31,7 +34,7 @@ export default {
   },
   data() {
     return {
-      adsImage: '/ads.jpg',
+      adsImage: '/ads',
       adsBgImage: '/bg-leaf.png',
       mdiArrowRight
     }
