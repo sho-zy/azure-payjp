@@ -2,9 +2,6 @@
   <div class="product-container">
     <section v-for="(category, i) of products" :key="i" class="product-section">
       <h2 class="title">
-        <svg v-if="category.icon" viewBox="0 0 24 24" class="icon">
-          <path :d="category.icon" />
-        </svg>
         <span class="text" v-text="category.title" />
       </h2>
       <productCardCarousel
@@ -43,13 +40,6 @@ export default {
       align-items: center;
       padding: 0 18px;
 
-      .icon {
-        width: 36px;
-        height: 36px;
-        fill: darkgray;
-        margin-right: 12px;
-      }
-
       .text {
         font-size: 30px;
         color: darkgray;
@@ -60,10 +50,6 @@ export default {
       margin-top: 0;
 
       .title {
-        .icon {
-          fill: white;
-        }
-
         .text {
           color: white;
         }

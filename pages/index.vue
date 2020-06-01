@@ -19,7 +19,6 @@
   </div>
 </template>
 <script>
-import { mdiCardsHeart } from '@mdi/js'
 export default {
   components: {
     commonHeaderContainer: () =>
@@ -50,18 +49,15 @@ export default {
       productItems: data.products,
       products: [
         {
-          title: 'Best sellers',
-          icon: mdiCardsHeart,
+          title: 'Popular products',
           items: data.products.filter((item) => item.hit)
         },
         {
           title: 'Big Product',
-          icon: null,
           items: data.products.filter((item) => item.type === 'Big Product')
         },
         {
           title: 'Small Product',
-          icon: null,
           items: data.products.filter((item) => item.type === 'Small Product')
         }
       ],
@@ -71,17 +67,7 @@ export default {
   data() {
     return {
       baseUrl: process.env.BASE_URL,
-      menuItems: [
-        {
-          name: 'Products'
-        },
-        {
-          name: 'About'
-        },
-        {
-          name: 'FAQ'
-        }
-      ]
+      menuItems: [{ name: 'Products' }, { name: 'About' }, { name: 'FAQ' }]
     }
   }
 }
