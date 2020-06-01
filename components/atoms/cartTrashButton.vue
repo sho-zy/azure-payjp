@@ -4,7 +4,7 @@
     aria-label="商品削除"
     @click="$store.commit('removeCartMap', id)"
   >
-    <svg viewBox="0 0 24 24">
+    <svg viewBox="0 0 24 24" class="icon">
       <path :d="mdiTrashCanOutline" />
     </svg>
   </button>
@@ -36,7 +36,7 @@ export default {
   align-items: center;
   transition: background-color 0.3s ease-in-out;
 
-  svg {
+  .icon {
     width: 20px;
     height: 20px;
     fill: darkred;

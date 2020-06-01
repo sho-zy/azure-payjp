@@ -2,7 +2,7 @@
   <div class="product-container">
     <section v-for="(category, i) of products" :key="i" class="product-section">
       <h2 class="title">
-        <svg v-if="category.icon" viewBox="0 0 24 24">
+        <svg v-if="category.icon" viewBox="0 0 24 24" class="icon">
           <path :d="category.icon" />
         </svg>
         <span class="text" v-text="category.title" />
@@ -43,7 +43,7 @@ export default {
       align-items: center;
       padding: 0 18px;
 
-      svg {
+      .icon {
         width: 36px;
         height: 36px;
         fill: darkgray;
@@ -60,7 +60,7 @@ export default {
       margin-top: 0;
 
       .title {
-        svg {
+        .icon {
           fill: white;
         }
 

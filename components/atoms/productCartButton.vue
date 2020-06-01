@@ -4,7 +4,7 @@
     :aria-label="'カートに追加する'"
     @click.stop="clickCartAction(id)"
   >
-    <svg viewBox="0 0 24 24">
+    <svg viewBox="0 0 24 24" class="icon">
       <path :d="mdiCartArrowDown" />
     </svg>
   </button>
@@ -41,7 +41,7 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 
-  svg {
+  .icon {
     width: 30px;
     height: 30px;
     fill: #88dd9b;
@@ -50,7 +50,8 @@ export default {
 
   &:hover {
     background-color: #88dd9b;
-    svg {
+
+    .icon {
       fill: white;
     }
   }

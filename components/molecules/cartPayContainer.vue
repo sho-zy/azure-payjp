@@ -24,7 +24,7 @@
         />
         <div v-if="isLoading || isCompleted" class="modal">
           <div class="message-box" :class="{ active: isCompleted }">
-            <svg viewBox="0 0 24 24">
+            <svg viewBox="0 0 24 24" class="icon">
               <path :d="isCompleted ? mdiCheckCircleOutline : mdiLoading" />
             </svg>
             <span
@@ -223,7 +223,7 @@ export default {
           border-radius: 8px;
           padding: 36px;
 
-          svg {
+          .icon {
             width: 48px;
             height: 48px;
             fill: darkgray;
@@ -257,7 +257,7 @@ export default {
           }
 
           &.active {
-            svg {
+            .icon {
               width: 64px;
               height: 64px;
               fill: #88dd9b;

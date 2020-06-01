@@ -4,7 +4,7 @@
     aria-label="閉じる"
     @click="$store.commit('modalClose')"
   >
-    <svg viewBox="0 0 24 24">
+    <svg viewBox="0 0 24 24" class="icon">
       <path :d="mdiClose" />
     </svg>
   </button>
@@ -31,7 +31,7 @@ export default {
   }
   cursor: pointer;
 
-  svg {
+  .icon {
     width: 40px;
     height: 40px;
     fill: black;

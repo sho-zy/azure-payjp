@@ -9,7 +9,7 @@
     <modalCloseButton class="close-button" />
     <p class="logo" v-text="appName" />
     <div class="cart">
-      <svg viewBox="0 0 24 24">
+      <svg viewBox="0 0 24 24" class="icon">
         <path :d="mdiCartOutline" />
       </svg>
       <span
@@ -28,7 +28,7 @@
         @click="$store.commit('modalOpen', 'cart')"
       >
         <span class="text" v-text="'Checkout'" />
-        <svg viewBox="0 0 24 24">
+        <svg viewBox="0 0 24 24" class="icon">
           <path :d="mdiArrowRight" />
         </svg>
       </button>
@@ -119,7 +119,7 @@ export default {
     align-items: center;
     position: relative;
 
-    svg {
+    .icon {
       width: 36px;
       height: 36px;
       fill: black;
@@ -156,7 +156,8 @@ export default {
           font-size: 24px;
         }
       }
-      svg {
+
+      .icon {
         width: 30px;
         height: 30px;
         fill: #88dd9b;

@@ -4,7 +4,7 @@
     :aria-label="label"
     @click="$store.commit('modalOpen', target)"
   >
-    <svg v-if="icon" viewBox="0 0 24 24">
+    <svg v-if="icon" viewBox="0 0 24 24" class="icon">
       <path :d="icon" />
     </svg>
     <span v-if="text" class="text" v-text="text" />
@@ -39,7 +39,7 @@ export default {
   justify-content: center;
   align-items: center;
 
-  svg {
+  .icon {
     width: 30px;
     height: 30px;
     fill: white;

@@ -39,7 +39,7 @@
     <p class="action">
       <span class="action-link">
         <span class="text" v-text="'See All Products'" />
-        <svg viewBox="0 0 24 24">
+        <svg viewBox="0 0 24 24" class="icon">
           <path :d="mdiArrowRight" />
         </svg>
       </span>
@@ -206,7 +206,8 @@ export default {
           font-size: 24px;
         }
       }
-      svg {
+
+      .icon {
         width: 30px;
         height: 30px;
         fill: #88dd9b;

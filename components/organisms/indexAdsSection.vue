@@ -22,7 +22,7 @@
       <p class="ads-link">
         <span class="link">
           <span class="text" v-text="'Discover'" />
-          <svg viewBox="0 0 24 24">
+          <svg viewBox="0 0 24 24" class="icon">
             <path :d="mdiArrowRight" />
           </svg>
         </span>
@@ -61,6 +61,7 @@ export default {
   .ads-image {
     width: 50%;
     background-color: #384647;
+
     .image {
       width: 100%;
       height: calc(100% - 48px);
@@ -130,7 +131,7 @@ export default {
           font-weight: bold;
         }
 
-        svg {
+        .icon {
           width: 30px;
           height: 30px;
           fill: white;

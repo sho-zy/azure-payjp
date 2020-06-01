@@ -8,7 +8,7 @@
         : $store.commit('reduceCartMap', id)
     "
   >
-    <svg viewBox="0 0 24 24">
+    <svg viewBox="0 0 24 24" class="icon">
       <path :d="isAdd ? mdiPlus : mdiMinus" />
     </svg>
   </button>
@@ -44,7 +44,7 @@ export default {
   align-items: center;
   transition: background-color 0.3s ease-in-out;
 
-  svg {
+  .icon {
     width: 16px;
     height: 16px;
     fill: darkgray;
