@@ -164,7 +164,7 @@ export default {
       margin-top: 24px;
       text-align: right;
       position: relative;
-      padding: 12px 12px 18px;
+      padding: 12px 6px 18px;
       background-color: white;
 
       .header {
@@ -172,6 +172,10 @@ export default {
         padding-left: 8px;
         text-align: left;
         margin-bottom: 12px;
+      }
+
+      #payjp-form {
+        min-width: 352px;
       }
 
       .pay-button {
